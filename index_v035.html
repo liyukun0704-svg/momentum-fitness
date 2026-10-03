@@ -1,0 +1,782 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Momentum Fitness · V0.3.4</title>
+<style>
+:root{--bg:#f6f7f9;--card:#ffffff;--text:#101114;--muted:#777b84;--line:#e9ebef;--pink:#ff2d55;--green:#30d158;--orange:#ff9f0a;--red:#ff453a;--blue:#0a84ff;--navy:#172a46;--navy2:#315a8a;--r-card:24px;--r-small:18px;--r-control:14px;--space-1:8px;--space-2:12px;--space-3:16px;--space-4:24px;--space-5:32px;--shadow:0 8px 30px rgba(20,28,42,.055);--shadow-hero:0 18px 45px rgba(23,42,70,.16)}*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","PingFang SC","Helvetica Neue",sans-serif;background:var(--bg);color:var(--text);letter-spacing:-.01em;-webkit-font-smoothing:antialiased}button,input,select,textarea{font:inherit}button{cursor:pointer}.app{max-width:1120px;margin:auto;padding:32px 24px 108px}.view{display:none}.view.active{display:block}.top,.row{display:flex;justify-content:space-between;align-items:center}.hello,.page-title{font-size:32px;font-weight:760;letter-spacing:-1.05px;line-height:1.08}.page-title{margin:0 0 22px}.date,.muted,.hint{color:var(--muted)}.date{font-size:14px;margin-top:7px;letter-spacing:0}.hint{font-size:12px;line-height:1.5}.iconbtn{border:1px solid var(--line);background:rgba(255,255,255,.9);width:44px;height:44px;border-radius:50%;box-shadow:0 4px 18px rgba(20,28,42,.045);font-size:19px}.section-title{display:flex;justify-content:space-between;align-items:end;margin:32px 2px 12px}.section-title h2{font-size:19px;letter-spacing:-.35px;margin:0}.section-title span{font-size:13px;color:var(--muted)}.today{background:linear-gradient(145deg,var(--today-a,var(--navy)),var(--today-b,var(--navy2)));color:white;border-radius:30px;padding:28px;box-shadow:var(--shadow-hero);position:relative;overflow:hidden;margin-top:26px}.today:after{content:"";position:absolute;width:260px;height:260px;border:42px solid rgba(255,255,255,.13);border-radius:50%;right:-130px;top:-125px;opacity:.9}.eyebrow{font-size:11px;font-weight:760;letter-spacing:1.8px;color:#aaa}.today h1{display:none}.today-week-goal{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;margin:12px 0 20px;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.10);backdrop-filter:blur(10px);font-size:12px;line-height:1.35;max-width:min(760px,92%)}.today-week-goal b{font-weight:760;margin-right:0;white-space:nowrap;opacity:.78}.today-week-goal span{opacity:.88}.today-row{display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:2}.pill{background:rgba(8,18,34,.34);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:13px 15px;min-width:170px;backdrop-filter:blur(8px)}.pill b{display:block;font-size:15px}.pill small{color:rgba(255,255,255,.68);display:block;margin-top:3px}.today-actions{margin-top:22px;position:relative;z-index:2}.primary,.save{border:0;border-radius:999px;font-weight:750;padding:12px 18px}.primary{background:white;color:#111;padding:13px 20px;box-shadow:0 5px 18px rgba(0,0,0,.08)}.save{background:#111;color:white}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.feature,.choice,.panel,.medals{background:var(--card);border:1px solid rgba(20,28,42,.045);border-radius:var(--r-card);box-shadow:var(--shadow)}.feature{padding:21px;min-height:154px;text-align:left;transition:transform .16s ease,box-shadow .16s ease}.feature .symbol{font-size:25px;margin-bottom:27px;width:42px;height:42px;border-radius:14px;background:#f3f5f8;display:grid;place-items:center}.feature h3{margin:0 0 5px;font-size:18px;letter-spacing:-.3px}.feature p{margin:0;color:var(--muted);font-size:12px;line-height:1.45}.medals,.panel{padding:20px}.medal-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:10px;margin-top:18px}.medal{text-align:center}.coin{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;margin:auto;border:4px solid #ddd;background:#eee;font-weight:800}.coin.gold{background:linear-gradient(145deg,#ffd76a,#d99d00);border-color:#f3bd29}.coin.silver{background:linear-gradient(145deg,#eee,#aaa);border-color:#c9c9c9}.coin.bronze{background:linear-gradient(145deg,#dc9b66,#9a572d);border-color:#b97243}.medal label{display:block;font-size:11px;color:var(--muted);margin-top:7px}.back{border:0;background:transparent;padding:0;color:var(--blue);margin-bottom:12px}.choice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.choice{padding:26px;text-align:left;min-height:170px}.choice .big{font-size:34px}.choice h3{font-size:22px;margin:30px 0 4px}.choice p{color:var(--muted);margin:0}.newbtn{width:100%;border:1.5px dashed #bbb;background:transparent;border-radius:20px;padding:17px;font-weight:700;margin-top:14px}.days{display:grid;gap:12px}.daycard{background:#f7f7f8;border-radius:20px;padding:16px}.dayhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.dayhead b{font-size:16px}.planTask{background:white;border-radius:16px;padding:13px;margin-top:8px;display:flex;justify-content:space-between;gap:10px;align-items:center}.planTask small{display:block;color:var(--muted);margin-top:3px}.mini{border:0;border-radius:999px;padding:7px 11px;font-weight:700}.mini.dark{background:#111;color:#fff}.mini.light{background:#e9e9ec}.formgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:13px;background:#fafafa;padding:12px}.exerciseBuilder{border-top:1px solid var(--line);padding-top:14px;margin-top:14px}.setPlan{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;margin-top:8px}.setPlan input{width:100%;border:1px solid var(--line);border-radius:11px;padding:10px}.workout-card{background:#fff;border-radius:22px;padding:18px;margin-bottom:12px;box-shadow:var(--shadow)}.exercise{border-top:1px solid var(--line);padding-top:14px;margin-top:14px}.setrow{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid #f0f0f2}.setrow:last-child{border:0}.statusBtns{display:flex;gap:6px;flex-wrap:wrap}.status{border:0;border-radius:999px;padding:8px 10px;font-weight:750;background:#eee}.status.done{background:#e8f8ed;color:#14833b}.status.over{background:#fff1d8;color:#a65b00}.status.miss{background:#ffe8e6;color:#b5261e}.status.active{outline:2px solid currentColor}.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:16px 0}.sum{background:#f5f5f7;border-radius:15px;padding:12px;text-align:center}.sum b{font-size:22px;display:block}.sum small{color:var(--muted)}.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.stat{background:#f7f7f8;border-radius:18px;padding:16px}.stat b{font-size:25px;display:block}.stat span{font-size:12px;color:var(--muted)}.ability-list{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.ability{background:#f7f7f8;border-radius:18px;padding:16px;border:0;text-align:left;width:100%;cursor:pointer}.ability:hover{transform:translateY(-1px)}.ability-meta{display:flex;justify-content:space-between;gap:8px;align-items:end}.ability-pb{font-size:12px;color:var(--muted);margin-top:5px}.ability .score{font-size:25px;font-weight:800;margin:10px 0 2px}.photo-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.photo{aspect-ratio:3/4;border:1.5px dashed #bbb;border-radius:18px;display:grid;place-items:center;color:var(--muted);overflow:hidden}.photo img{width:100%;height:100%;object-fit:cover}.modal{position:fixed;inset:0;background:rgba(0,0,0,.32);display:none;align-items:end;justify-content:center;z-index:50}.modal.open{display:flex}.sheet{background:white;border-radius:28px 28px 0 0;padding:24px;width:min(650px,100%);max-height:88vh;overflow:auto}.close{float:right;border:0;background:#eee;border-radius:50%;width:34px;height:34px}.bottom{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.92);backdrop-filter:blur(18px);border-top:1px solid var(--line);padding:8px 12px calc(8px + env(safe-area-inset-bottom));z-index:20}.bottom button{flex:1;border:0;background:transparent;font-size:11px;color:#666}.bottom b{display:block;font-size:21px;color:#222}.tabs{display:flex;gap:7px;margin-bottom:16px}.tab{border:0;background:#e8e8eb;padding:8px 13px;border-radius:999px}.tab.active{background:#111;color:white}.detailbox{background:#f7f7f8;border-radius:18px;padding:14px;margin:10px 0}.detailbox h3{margin:0 0 10px;font-size:16px}.recentItem{padding:13px 0;border-bottom:1px solid var(--line);cursor:pointer}.recentItem:last-child{border-bottom:0}.recentItem:hover{opacity:.72}.editgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.editgrid input,.editgrid textarea{width:100%;border:1px solid var(--line);border-radius:12px;background:#fff;padding:10px}.full{grid-column:1/-1}.compact-metrics{display:grid;grid-template-columns:repeat(3,minmax(76px,110px));gap:8px;align-items:end}.compact-metrics .field input{padding:9px 8px}.wide-training{margin-top:10px}.strength-sets{display:grid;gap:8px;margin-top:10px}.strength-set{display:grid;grid-template-columns:62px minmax(80px,1fr) minmax(88px,1fr) auto;gap:8px;align-items:end;background:#fff;border-radius:14px;padding:10px}.strength-set .field input{padding:9px 8px}.end-item{width:100%;margin-top:14px;border:0;border-radius:14px;padding:12px 14px;font-weight:800;background:#111;color:#fff}.end-item.ended{background:#e9f8ee;color:#188443}.complete-screen{text-align:center;padding:34px 18px}.complete-mark{font-size:58px;margin-bottom:8px}.complete-screen h2{font-size:30px;margin:6px 0}.complete-screen p{color:var(--muted);line-height:1.6}.complete-actions{display:flex;gap:8px;justify-content:center;margin-top:20px}@media(max-width:560px){.editgrid{grid-template-columns:1fr}.compact-metrics{grid-template-columns:repeat(3,1fr)}.strength-set{grid-template-columns:52px 1fr 1fr}.strength-set .statusBtns{grid-column:1/-1}}
+@media(max-width:850px){.grid4{grid-template-columns:repeat(2,1fr)}.medal-grid{grid-template-columns:repeat(6,1fr)}.choice-grid{grid-template-columns:1fr}.ability-list{grid-template-columns:repeat(2,1fr)}.stats-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.core3{grid-template-columns:1fr!important;gap:9px}.core3 .feature{min-height:76px;padding:14px 16px;display:grid;grid-template-columns:42px 1fr 22px;grid-template-rows:auto auto;column-gap:10px;align-items:center;position:relative}.core3 .feature:after{content:'›';grid-column:3;grid-row:1/3;font-size:25px;color:#aaa;justify-self:end}.core3 .feature .symbol{grid-column:1;grid-row:1/3;font-size:23px;margin:0;width:38px;height:38px;border-radius:12px;background:#f3f3f5;display:grid;place-items:center}.core3 .feature h3{grid-column:2;grid-row:1;font-size:15px;white-space:nowrap;margin:0 0 2px}.core3 .feature p{grid-column:2;grid-row:2;font-size:11px;line-height:1.35;margin:0}.app{padding:22px 16px 90px}.hello,.page-title{font-size:29px}.today{padding:20px}.today h1{font-size:25px}.grid4{gap:10px}.feature{min-height:145px;padding:17px}.medal-grid{grid-template-columns:repeat(4,1fr)}.coin{width:50px;height:50px}.bottom{display:flex}.formgrid{grid-template-columns:1fr}.ability-list{grid-template-columns:1fr}.photo-row{grid-template-columns:repeat(2,1fr)}.summary{grid-template-columns:repeat(2,1fr)}.setrow{grid-template-columns:1fr}.statusBtns{justify-content:flex-start}}
+@media(min-width:760px){.core3{grid-template-columns:repeat(3,1fr)!important}}
+.record-actions{display:flex;gap:8px;align-items:center}.record-actions button{border:0;border-radius:999px;padding:7px 10px;font-weight:700}.danger{background:#ffe8e6;color:#b5261e}.history-group{margin:14px 0}.history-group>h3{margin:0 0 8px}.history-card{background:#fff;border-radius:18px;padding:14px;margin:8px 0;box-shadow:var(--shadow)}.today-complete-pill{background:rgba(255,255,255,.18);border-radius:16px;padding:14px 16px;position:relative;z-index:2}
+.archive-list{display:grid;gap:12px}.archive-card{background:#f7f7f8;border-radius:18px;padding:16px;text-align:left;border:0;width:100%}.archive-card h3{margin:0 0 5px}.thumb-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}.thumb{aspect-ratio:1;border-radius:14px;overflow:hidden;background:#eee;position:relative}.thumb img{width:100%;height:100%;object-fit:cover}.thumb button{position:absolute;right:5px;top:5px;border:0;border-radius:50%;width:25px;height:25px;background:rgba(0,0,0,.65);color:#fff}.data-actions{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.data-action{border:0;border-radius:17px;background:#f3f3f5;padding:15px;text-align:left}.data-action b{display:block;margin-bottom:4px}.photo-add{display:block;border:1.5px dashed #aaa;border-radius:15px;padding:14px;text-align:center;margin-top:10px}.today-photo-box{margin-top:12px}.today-photo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:9px}.today-photo-thumb{aspect-ratio:1;border-radius:12px;overflow:hidden;background:#eee;position:relative}.today-photo-thumb img{width:100%;height:100%;object-fit:cover}.today-photo-thumb button{position:absolute;right:4px;top:4px;border:0;border-radius:50%;width:24px;height:24px;background:rgba(0,0,0,.65);color:#fff}.viewer{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:100;display:none;align-items:center;justify-content:center;overflow:hidden}.viewer.open{display:flex}.viewer img{max-width:92vw;max-height:84vh;object-fit:contain;transform-origin:center;transition:transform .12s}.viewer .vclose{position:absolute;right:20px;top:20px;border:0;background:#fff;width:42px;height:42px;border-radius:50%;font-size:22px}.viewer .vtools{position:absolute;bottom:30px;display:flex;gap:8px}.viewer .vtools button{border:0;border-radius:999px;padding:10px 16px;font-weight:800}.import-preview{max-height:240px;overflow:auto;background:#f7f7f8;border-radius:14px;padding:12px;margin-top:10px;font-size:12px;white-space:pre-wrap}@media(max-width:560px){.thumb-grid{grid-template-columns:repeat(3,1fr)}.data-actions{grid-template-columns:1fr}}
+
+/* V0.3.0 · HOME visual system only */
+.home-section-title h2{font-size:17px;color:#343842}.home-section-title span{letter-spacing:.7px;font-size:11px}.core3 .feature h3 small{font-size:10px;letter-spacing:1px;color:#9a9da5;margin-left:5px;font-weight:760}.core3 .feature:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(20,28,42,.075)}.medals{box-shadow:none}.today .eyebrow{color:rgba(255,255,255,.66)}
+@media(max-width:560px){.app{padding:24px 18px 96px}.top{margin-bottom:0}.hello{font-size:28px}.today{margin-top:22px;padding:22px;border-radius:26px}.today-week-goal{margin:11px 0 17px;max-width:100%;white-space:normal}.today-row{display:grid;grid-template-columns:1fr;width:100%}.pill{min-width:0;width:100%;border-radius:16px}.today-actions .primary{width:100%;padding:14px 18px}.section-title{margin-top:28px}.core3{gap:10px}.core3 .feature{min-height:82px;padding:14px 15px;border-radius:20px;box-shadow:0 5px 22px rgba(20,28,42,.045)}.core3 .feature .symbol{width:40px;height:40px;border-radius:13px}.core3 .feature h3 small{font-size:9px}.medals{border-radius:20px;padding:17px}}
+
+/* V0.3.1 · HOME emphasis + Apple-system palette + equal PROGRESS pillars */
+:root{--bg:#f5f5f7;--card:#fff;--text:#1d1d1f;--muted:#6e6e73;--line:#e5e5ea;--blue:#007aff;--green:#34c759;--orange:#ff9500;--red:#ff3b30;--shadow:0 6px 24px rgba(0,0,0,.055);--shadow-hero:0 12px 34px rgba(0,0,0,.08)}
+.today{background:#fff;color:var(--text);border:1px solid rgba(0,0,0,.045);box-shadow:var(--shadow-hero);padding:32px}.today:after{display:none}.today .eyebrow{color:var(--blue);font-size:15px;letter-spacing:1.4px;font-weight:800}.today-week-goal{display:block;background:#f5f5f7;border:0;border-radius:20px;padding:16px 18px;margin:18px 0 22px;max-width:100%;font-size:16px}.today-week-goal b{display:block;color:var(--muted);font-size:12px;letter-spacing:.4px;margin-bottom:6px}.today-week-goal span{font-size:18px;font-weight:590;line-height:1.45;letter-spacing:-.35px;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Rounded","PingFang SC",sans-serif}.pill{background:#f5f5f7;border:0;color:var(--text);backdrop-filter:none}.pill small{color:var(--muted)}.primary{background:var(--blue);color:white;box-shadow:none}.today-complete-pill{background:#edf8f0;color:#1f7a39}.feature .symbol{color:var(--blue);background:#f2f7ff}.mini.dark,.save,.end-item{background:var(--blue)}.tab.active{background:var(--blue)}
+.progress-head{margin-bottom:20px}.progress-head .eyebrow{color:var(--blue);font-size:12px}.progress-head .page-title{margin:5px 0 7px}.progress-head p{margin:0;color:var(--muted)}.progress-duo{display:grid;grid-template-columns:1.55fr 1fr;gap:16px;align-items:start}.progress-card{background:#fff;border:1px solid rgba(0,0,0,.045);border-radius:28px;padding:22px;box-shadow:var(--shadow);min-width:0}.progress-kicker{font-size:11px;letter-spacing:1.35px;font-weight:800;color:var(--blue)}.progress-card-head{display:flex;justify-content:space-between;gap:12px;align-items:start;margin:7px 0 18px}.progress-card-head h2{margin:0 0 5px;font-size:24px;letter-spacing:-.6px}.progress-card-head p{margin:0;color:var(--muted);font-size:13px}.progress-number{font-size:18px;font-weight:750;color:var(--blue);white-space:nowrap}.progress-inner{padding:0;border:0;box-shadow:none}.body-snapshot{display:grid;grid-template-columns:1fr 1fr;gap:10px}.body-snapshot>div{background:#f5f5f7;border-radius:18px;padding:15px}.body-snapshot span{display:block;font-size:11px;color:var(--muted);margin-bottom:8px}.body-snapshot b{font-size:20px;letter-spacing:-.5px}.progress-open{width:100%;margin-top:14px;border:0;border-radius:16px;padding:14px 16px;background:#f2f7ff;color:var(--blue);font-weight:750;display:flex;justify-content:space-between}.body-goal-panel{display:grid;grid-template-columns:1fr 1fr;gap:24px;background:#fff;border-radius:26px;padding:22px;box-shadow:var(--shadow);margin-bottom:22px}.body-goal-panel h2{margin:6px 0;font-size:22px}.body-goal-panel p{margin:0;color:var(--muted);font-size:13px}.body-goal-fields{display:grid;gap:9px}.body-goal-fields label{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:13px}.body-goal-fields label span{display:flex;align-items:center;gap:5px;color:var(--muted)}.body-goal-fields input{width:90px;border:1px solid var(--line);border-radius:12px;padding:9px;background:#f5f5f7}.body-goal-fields button{border:0;border-radius:13px;background:var(--blue);color:#fff;padding:11px;font-weight:750}
+@media(max-width:850px){.progress-duo{grid-template-columns:1fr}.progress-card{padding:20px}.body-goal-panel{grid-template-columns:1fr}}
+@media(max-width:560px){.today{padding:25px 22px}.today .eyebrow{font-size:17px}.today-week-goal{padding:16px;margin:16px 0 18px}.today-week-goal span{font-size:18px}.progress-card-head h2{font-size:22px}.body-snapshot b{font-size:18px}}
+</style>
+<style>
+/* V0.3.2 · TODAY visual refinement */
+:root{--lime:#D9F75A;--ink:#111214}
+.today{background:var(--lime)!important;color:var(--ink)!important;box-shadow:0 18px 42px rgba(91,105,24,.16)!important;padding:32px!important;min-height:330px}
+.today:after{display:none!important}
+.today .eyebrow{color:rgba(17,18,20,.62)!important;font-size:18px!important;font-weight:850;letter-spacing:1.5px}
+.today-week-goal{display:flex!important;flex-direction:column;align-items:flex-start!important;gap:5px!important;width:min(720px,calc(100% - 120px));max-width:none!important;margin:22px 0 24px!important;padding:0!important;background:transparent!important;border:0!important;backdrop-filter:none!important}
+.today-week-goal b{font-size:13px!important;letter-spacing:.5px;opacity:.58!important}
+.today-week-goal span{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","PingFang SC","Helvetica Neue",sans-serif;font-size:23px!important;font-weight:720!important;line-height:1.32!important;letter-spacing:-.45px;opacity:1!important}
+.today-row{padding-right:110px}
+.pill{background:rgba(255,255,255,.46)!important;border:1px solid rgba(17,18,20,.06)!important;color:var(--ink)!important;box-shadow:0 4px 14px rgba(70,80,20,.05);backdrop-filter:blur(12px)}
+.pill small{color:rgba(17,18,20,.58)!important}
+.today-actions{margin-top:26px!important}
+.today-actions .primary{width:100%;min-height:58px;border-radius:17px!important;background:var(--ink)!important;color:#fff!important;font-size:17px;font-weight:800;padding:16px 20px!important;box-shadow:0 8px 20px rgba(0,0,0,.16)!important}
+.primary,.save,.body-goal-fields button{background:#111!important;color:#fff!important}
+.progress-open{background:#111!important;color:#fff!important}
+.today-progress-ring{position:absolute;z-index:3;right:30px;top:30px;width:92px;height:92px;border-radius:50%;background:conic-gradient(var(--ink) var(--ring-progress,0%),rgba(17,18,20,.14) 0);display:grid;place-items:center}
+.today-progress-ring:before{content:"";position:absolute;inset:8px;border-radius:50%;background:var(--lime)}
+.today-ring-inner{position:relative;z-index:1;text-align:center;line-height:1.05}.today-ring-inner b{display:block;font-size:17px;letter-spacing:-.35px}.today-ring-inner span{display:block;margin-top:5px;font-size:9px;font-weight:800;letter-spacing:1.15px;opacity:.52}
+.today-complete-pill{color:var(--ink)!important}
+@media(max-width:560px){.today{padding:28px 22px!important;min-height:350px}.today-progress-ring{width:82px;height:82px;right:20px;top:22px}.today-progress-ring:before{inset:7px}.today-week-goal{width:calc(100% - 82px);margin-top:24px!important}.today-week-goal span{font-size:21px!important}.today-row{padding-right:0;margin-top:6px}.pill{min-width:100%}.today-actions .primary{min-height:60px}}
+</style>
+
+<style>
+/* V0.3.3 · HOME / Apple Fitness-inspired dark activity card */
+:root{--fitness-card:#171719;--fitness-card-2:#0f0f10;--fitness-ring:#ff2d55;--fitness-ring-soft:rgba(255,45,85,.18)}
+.today{background:linear-gradient(145deg,var(--fitness-card),var(--fitness-card-2))!important;color:#fff!important;box-shadow:0 18px 46px rgba(0,0,0,.20)!important;border:1px solid rgba(255,255,255,.06)!important}
+.today .eyebrow{color:rgba(255,255,255,.58)!important}
+.today-week-goal b{color:rgba(255,255,255,.55)!important;opacity:1!important}
+.today-week-goal span{color:#fff!important;opacity:1!important}
+.pill{background:rgba(255,255,255,.085)!important;border:1px solid rgba(255,255,255,.075)!important;color:#fff!important;box-shadow:none!important}
+.pill small{color:rgba(255,255,255,.58)!important}
+.today-progress-ring{background:conic-gradient(var(--fitness-ring) var(--ring-progress,0%),var(--fitness-ring-soft) 0)!important;box-shadow:0 0 0 1px rgba(255,45,85,.08),0 8px 24px rgba(255,45,85,.12)}
+.today-progress-ring:before{background:#141416!important}
+.today-ring-inner b{color:#fff}.today-ring-inner span{color:rgba(255,255,255,.58);opacity:1!important}
+.today-actions .primary{background:#fff!important;color:#111!important;box-shadow:0 8px 22px rgba(0,0,0,.24)!important}
+.today-actions .primary:active{transform:scale(.985)}
+.today-complete-pill{background:rgba(52,199,89,.14)!important;color:#fff!important;border:1px solid rgba(52,199,89,.22)}
+@media(max-width:560px){.today{box-shadow:0 14px 36px rgba(0,0,0,.18)!important}}
+</style>
+<style>
+/* V0.3.4 · unified visual language — presentation only */
+:root{--ink:#111113;--soft:#f5f5f7;--soft-2:#efeff1;--hair:rgba(0,0,0,.07);--fitness-ring:#ff2d55}
+/* Primary actions: one language everywhere */
+.save,.mini.dark,.end-item,.body-goal-fields button{background:var(--ink)!important;color:#fff!important;box-shadow:none!important}
+.primary{background:var(--ink)!important;color:#fff!important;box-shadow:none!important}
+.today-actions .primary{background:#fff!important;color:#111!important;box-shadow:0 8px 22px rgba(0,0,0,.24)!important}
+.mini.light,.record-actions button:not(.danger){background:var(--soft-2)!important;color:var(--ink)!important}
+.back{color:var(--ink)!important;font-weight:700}
+.tab{background:var(--soft-2)!important;color:#5b5b60!important;font-weight:700}.tab.active{background:var(--ink)!important;color:#fff!important}
+.newbtn{border-color:#c9c9ce!important;color:var(--ink)!important;background:#fff!important}
+/* Cards and controls share the same radius / surface / border rhythm */
+.panel,.medals,.progress-card,.workout-card,.history-card,.body-goal-panel{border:1px solid var(--hair)!important;box-shadow:0 6px 24px rgba(0,0,0,.045)!important}
+.daycard,.stat,.ability,.detailbox,.archive-card,.body-snapshot>div{background:var(--soft)!important;border:1px solid rgba(0,0,0,.025)!important}
+.planTask,.strength-set{border:1px solid var(--hair)!important;box-shadow:none!important}
+.field input,.field select,.field textarea,.editgrid input,.editgrid textarea,.setPlan input,.body-goal-fields input{background:#fff!important;border:1px solid #d9d9de!important;outline:none}
+.field input:focus,.field select:focus,.field textarea:focus,.editgrid input:focus,.editgrid textarea:focus,.setPlan input:focus,.body-goal-fields input:focus{border-color:#8e8e93!important;box-shadow:0 0 0 3px rgba(0,0,0,.055)!important}
+/* PLAN */
+#plan .page-title,#stats .page-title,#history .page-title,#ability .page-title,#bodyArchive .page-title{letter-spacing:-.9px}
+#plan .daycard{padding:18px!important;border-radius:22px!important}
+#plan .planTask{border-radius:16px!important}
+#plan .mini.dark{padding:8px 13px!important}
+/* TRACK */
+#stats .panel{border-radius:24px!important}
+#stats .stat{border-radius:17px!important}
+.record-actions .danger,.danger{background:#fff0ef!important;color:#b42318!important}
+/* PROGRESS: neutral shell; medals carry their own metal colours */
+.progress-head .eyebrow,.progress-kicker,.progress-number{color:var(--ink)!important}
+.progress-duo{grid-template-columns:1fr 1fr!important}
+.progress-open{background:var(--ink)!important;color:#fff!important}
+.feature .symbol{color:var(--ink)!important;background:var(--soft)!important}
+.coin{box-shadow:inset 0 1px 1px rgba(255,255,255,.55),0 2px 7px rgba(0,0,0,.08)!important}
+.coin.gold{background:linear-gradient(145deg,#f7d66b,#c89418)!important;border-color:#ddb53d!important}
+.coin.silver{background:linear-gradient(145deg,#eeeeef,#a9a9ad)!important;border-color:#c7c7ca!important}
+.coin.bronze{background:linear-gradient(145deg,#d49a70,#8f5738)!important;border-color:#b8764e!important}
+/* Secondary utilities */
+.iconbtn,.close{color:var(--ink)!important}.data-action{background:var(--soft)!important;border:1px solid var(--hair)!important}.photo-add{color:var(--ink)!important;border-color:#b8b8bd!important}
+/* Keep Fitness pink exclusive to the TODAY activity ring / destructive red separate. */
+@media(max-width:850px){.progress-duo{grid-template-columns:1fr!important}}
+@media(max-width:560px){.page-title{font-size:30px}.sheet{border-radius:28px 28px 0 0}.mini.dark,.save{min-height:38px}.progress-card{border-radius:24px!important}}
+
+/* V0.3.5 · PLAN CTA consistency */
+#plan .mini.dark, #plan button.save, #plan .save {background:#111113!important;color:#fff!important;border-color:#111113!important;box-shadow:none!important}
+#plan .mini.dark:hover, #plan button.save:hover {background:#202023!important}
+</style>
+</head><body><div class="app">
+<section id="home" class="view active"><div class="top"><div><div class="hello">你好，<span id="displayName">YK</span></div><div class="date" id="todayDate"></div></div><button class="iconbtn" onclick="openSettings()">⚙︎</button></div><div class="today"><div class="today-progress-ring" id="todayProgressRing"><div class="today-ring-inner"><b id="todayRingCount">0 / 0</b><span>DONE</span></div></div><div class="eyebrow">TODAY</div><h1 id="todayTitle"></h1><div class="today-week-goal" id="todayWeekGoal"><b>本周目标</b><span>暂未设置</span></div><div class="today-row" id="todayTasks"></div><div class="today-actions"><button class="primary" onclick="startToday()">开始训练 →</button></div></div><div class="section-title home-section-title"><h2>Momentum</h2><span>PLAN · TRAIN · TRACK · PROGRESS</span></div><div class="grid4 core3"><button class="feature" onclick="go('plan')"><div class="symbol">▦</div><h3>计划 <small>PLAN</small></h3><p>安排本周与未来训练</p></button><button class="feature" onclick="go('stats')"><div class="symbol">↗</div><h3>记录 <small>TRACK</small></h3><p>本周 <span id="weekCount">0</span> 次训练 · 查看统计与历史</p></button><button class="feature" onclick="go('ability')"><div class="symbol">◎</div><h3>进步 <small>PROGRESS</small></h3><p>PERFORMANCE · BODY</p></button></div><div class="section-title"><h2>奖章</h2><span>PERFORMANCE · 12项</span></div><div class="medals"><div class="row"><div><b>ATHLETIC MEDALS</b><div class="hint">铜牌达标 · 银牌良好 · 金牌优秀</div></div><b id="homeMedalCount">0 / 12</b></div><div class="medal-grid" id="medalGrid"></div></div></section>
+<section id="plan" class="view"><button class="back" onclick="go('home')">‹ 首页</button><h1 class="page-title">本周规划</h1><div class="panel"><div class="section-title"><h2>向前规划</h2><span>过去日期自动隐藏 · 历史不会删除</span></div><div class="row" style="gap:8px;flex-wrap:wrap;margin-bottom:14px"><button class="mini dark" onclick="openCustom()">＋ 新建项目</button><button class="mini light" onclick="addNextWeek()">＋ 新增下一周</button><button class="mini light" onclick="shiftToday()">↘ 今天休息 · 计划顺延一天</button><button class="mini light" onclick="toggleHistory()">查看历史计划 ›</button></div><div class="days" id="days"></div><div id="historyWrap" style="display:none;margin-top:30px"><div class="section-title"><h2>历史计划</h2><span>仅供回顾</span></div><div class="days" id="historyDays"></div></div></div></section>
+<section id="execute" class="view"><button class="back" onclick="go('home')">‹ 首页</button><div class="row" style="align-items:end;margin-bottom:18px"><div><div class="eyebrow" style="color:var(--muted)">TODAY · EXECUTE</div><h1 class="page-title" style="margin:4px 0 0">今日训练</h1></div><div class="hint">计划已载入 · 只需标记完成状态</div></div><div id="executeArea"></div><div class="panel" id="finishPanel"><div class="summary" id="liveSummary"></div><div class="hint">训练结束时可以当场补充 RPE、心率、感受和实际数据；全部非必填，也可以保存后从「最近记录」继续编辑。</div><div style="margin-top:16px"><button class="save" style="width:100%;padding:15px 18px" onclick="openFinishSummary()">结束训练</button></div></div></section>
+<section id="record" class="view"><button class="back" onclick="go('home')">‹ 首页</button><h1 class="page-title">记录训练</h1><p class="muted">计划内训练建议从首页「开始训练」进入。这里用于临时增加一次没有提前规划的训练。</p><div class="choice-grid"><button class="choice" onclick="quickRecord('有氧')"><div class="big">🏃</div><h3>有氧训练</h3><p>跑步 · 游泳 · 徒步 · 球类</p></button><button class="choice" onclick="quickRecord('力量')"><div class="big">💪</div><h3>力量训练</h3><p>动作 · 重量 · 组数 · 次数</p></button><button class="choice" onclick="quickRecord('技能')"><div class="big">◇</div><h3>技能训练</h3><p>倒立 · L-sit · 滑雪 · 自定义</p></button></div><button class="newbtn" onclick="openCustom()">＋ 新建项目</button><div class="section-title"><h2>最近记录</h2></div><div class="panel" id="recentWorkouts"></div></section>
+<section id="ability" class="view progress-view"><button class="back" onclick="go('home')">‹ 首页</button><div class="progress-head"><div class="eyebrow">PROGRESS</div><h1 class="page-title">进步</h1><p>看见运动表现与身体状态的变化。</p></div><div class="progress-duo"><div class="progress-card performance-card"><div class="progress-kicker">PERFORMANCE</div><div class="progress-card-head"><div><h2>运动表现</h2><p>12 项能力 · PB · 测试 · 奖牌</p></div><div class="progress-number" id="progressPerformanceCount">0 / 12</div></div><div class="panel progress-inner"><div class="row" style="margin-bottom:16px"><div><b>12项运动表现</b><div class="hint">当前成绩 · 历史PB · 最近3次测试</div></div><div id="abilityMedalSummary" class="hint"></div></div><div class="ability-list" id="abilityList"></div></div></div><div class="progress-card body-card"><div class="progress-kicker">BODY</div><div class="progress-card-head"><div><h2>身体档案</h2><p>当前状态 · 阶段目标 · 围度 · 照片</p></div></div><div class="body-snapshot"><div><span>当前体重</span><b id="progressCurrentWeight">—</b></div><div><span>目标体重</span><b id="progressTargetWeight">—</b></div><div><span>当前体脂</span><b id="progressCurrentFat">—</b></div><div><span>目标体脂</span><b id="progressTargetFat">—</b></div></div><button class="progress-open" onclick="openBodyArchive()">查看身体档案 <span>→</span></button></div></div></section>
+<section id="bodyArchive" class="view"><button class="back" onclick="go('ability')">‹ 进步</button><div class="row" style="align-items:end;margin-bottom:18px"><div><div class="eyebrow" style="color:var(--muted)">PROGRESS · BODY</div><h1 class="page-title" style="margin:4px 0 0">身体档案</h1></div><button class="mini dark" onclick="openBodyEntry()">＋ 新增记录</button></div><div class="body-goal-panel"><div><div class="progress-kicker">BODY GOAL</div><h2>阶段目标</h2><p>用两个数字定义这一阶段想去到的身体状态。</p></div><div class="body-goal-fields"><label>目标体重 <span><input id="bodyGoalWeight" type="number" step="0.1" placeholder="kg"> kg</span></label><label>目标体脂 <span><input id="bodyGoalFat" type="number" step="0.1" placeholder="%"> %</span></label><button onclick="saveBodyGoals()">保存目标</button></div></div><div class="section-title"><h2>历史档案</h2><span>BODY ARCHIVE</span></div><div id="bodyArchiveList" class="archive-list"></div></section><section id="stats" class="view"><button class="back" onclick="go('home')">‹ 首页</button><div class="row" style="align-items:end;margin-bottom:18px"><div><div class="eyebrow" style="color:var(--muted)">TRACK</div><h1 class="page-title" style="margin:4px 0 0">训练统计</h1></div><button class="mini light" onclick="quickRecord('补录')">＋ 补录训练</button></div><div class="tabs" id="statsTabs"><button class="tab active" onclick="setStatsRange('week',this)">本周</button><button class="tab" onclick="setStatsRange('month',this)">本月</button><button class="tab" onclick="setStatsRange('quarter',this)">本季度</button><button class="tab" onclick="setStatsRange('year',this)">今年</button></div><div class="panel"><div class="stats-grid"><div class="stat"><b id="statSessions">0</b><span>训练项目</span></div><div class="stat"><b id="statMinutes">0</b><span>总时长 min</span></div><div class="stat"><b id="statRunKm">0</b><span>跑步 km</span></div><div class="stat"><b id="statStrengthSets">0</b><span>力量组数</span></div><div class="stat"><b id="statHikeKm">0</b><span>徒步 km</span></div><div class="stat"><b id="statAscent">0</b><span>徒步爬升 m</span></div><div class="stat"><b id="statSkillMinutes">0</b><span>技能 min</span></div></div></div><div class="panel" style="margin-top:14px"><div class="row"><h3 style="margin:0">最近记录</h3><span class="hint">最近 7 个训练项目</span></div><div id="statsRecent" style="margin-top:10px"></div><button class="newbtn" onclick="openFullHistory()">查看完整训练记录 ›</button></div></section><section id="history" class="view"><button class="back" onclick="go('stats')">‹ 训练统计</button><div class="row" style="align-items:end;margin-bottom:18px"><div><div class="eyebrow" style="color:var(--muted)">TRACK · HISTORY</div><h1 class="page-title" style="margin:4px 0 0">完整训练记录</h1></div></div><div class="tabs"><button id="historyDateTab" class="tab active" onclick="setHistoryMode('date')">按日期</button><button id="historyProjectTab" class="tab" onclick="setHistoryMode('project')">按项目</button></div><div id="historyList"></div></section></div></div>
+<nav class="bottom"><button onclick="go('home')"><b>⌂</b>首页</button><button onclick="go('plan')"><b>▦</b>规划</button><button onclick="go('stats')"><b>↗</b>统计</button><button onclick="go('ability')"><b>◎</b>进步</button></nav>
+<div class="modal" id="addPlanModal"><div class="sheet"><button class="close" onclick="closeModal('addPlanModal')">×</button><h2>添加计划训练</h2><input id="planDayIndex" type="hidden"><div class="formgrid"><div class="field"><label>训练分类</label><select id="planType" onchange="fillPlanNames()"><option>有氧</option><option>力量</option><option>技能</option></select></div><div class="field"><label>项目</label><select id="planName" onchange="togglePlanFields()"></select></div></div><div id="aerobicFields" style="margin-top:14px"><div class="formgrid"><div class="field"><label>计划距离 km</label><input id="planDistance" type="number" step="0.1" placeholder="5"></div><div class="field"><label>计划时长 min</label><input id="planMinutes" type="number" placeholder="可选"></div></div></div><div id="strengthFields" class="exerciseBuilder" style="display:none"><div class="row"><b>计划组数</b><button class="mini light" onclick="addSetPlan()">＋加一组</button></div><div id="setPlans"></div><p class="hint">训练时无需重新输入。每一组直接选择 ✓完成、↑超额完成 或 ×未完成。</p></div><div id="skillFields" style="display:none;margin-top:14px"><div class="field"><label>计划练习时间 min</label><input id="skillMinutes" type="number" placeholder="15"></div></div><div class="field" style="margin-top:14px"><label>计划备注</label><input id="planNote" placeholder="例如 RPE 4–5 / 轻松完成"></div><div style="margin-top:16px"><button class="save" onclick="savePlanTask()">加入本周规划</button></div></div></div>
+<div class="modal" id="customModal"><div class="sheet"><button class="close" onclick="closeModal('customModal')">×</button><h2>新建项目</h2><div class="formgrid"><div class="field"><label>项目名称</label><input id="customName" placeholder="例如：攀岩"></div><div class="field"><label>分类</label><select id="customType"><option>有氧</option><option>力量</option><option>技能</option></select></div><div class="field"><label>图标</label><select id="customEmoji"></select></div></div><div style="margin-top:16px"><button class="save" onclick="saveCustom()">创建项目</button></div></div></div>
+<div class="modal" id="todayCompleteModal"><div class="sheet"><div class="complete-screen"><div class="complete-mark">✓</div><div class="eyebrow" style="color:var(--muted)">TODAY COMPLETE</div><h2>恭喜你，今天完成了训练</h2><p id="completeText">今天的训练已经全部记录。</p><div class="complete-actions"><button class="save" onclick="closeCompleteAndHome()">完成</button><button class="mini light" onclick="closeCompleteAndRecord()">查看记录</button></div></div></div></div><div class="modal" id="finishSummaryModal"><div class="sheet"><button class="close" onclick="closeModal('finishSummaryModal')">×</button><div class="eyebrow" style="color:var(--muted)">WORKOUT SUMMARY</div><h2 style="margin-top:5px">训练总结</h2><p class="hint">现在记录最准确，但所有内容都不是必填。</p><div id="finishDetailFields"></div><div class="editgrid" style="margin-top:12px"><div class="field"><label>整体 RPE · 1–10</label><input id="finishRpe" type="number" min="1" max="10" placeholder="例如 5"></div><div class="field"><label>训练感受</label><input id="finishFeeling" placeholder="轻松 / 状态好 / 腿有点沉…"></div><div class="field full"><label>补充备注</label><textarea id="finishNote" rows="3" placeholder="任何想留下来的信息"></textarea></div></div><button class="save" style="width:100%;margin-top:16px;padding:15px" onclick="saveFinishedTraining()">结束训练并保存</button></div></div>
+<div class="modal" id="editWorkoutModal"><div class="sheet"><button class="close" onclick="closeModal('editWorkoutModal')">×</button><div class="eyebrow" style="color:var(--muted)">EDIT WORKOUT</div><h2 style="margin-top:5px">修改训练记录</h2><input id="editWorkoutIndex" type="hidden"><div id="editWorkoutFields"></div><div class="section-title"><h2>训练照片</h2><span>可选 · 支持多张</span></div><div id="workoutPhotoGrid" class="thumb-grid"></div><label class="photo-add">＋ 添加训练照片<input id="workoutPhotoInput" type="file" accept="image/*" multiple hidden onchange="addWorkoutPhotos(event)"></label><div style="display:flex;gap:8px;margin-top:16px"><button class="save" style="flex:1;padding:15px" onclick="saveWorkoutEdit()">保存修改</button><button class="mini" style="background:#ffe8e6;color:#b5261e;padding:15px" onclick="deleteCurrentWorkoutItem()">删除记录</button></div></div></div>
+<div class="modal" id="abilityModal"><div class="sheet"><button class="close" onclick="closeModal('abilityModal')">×</button><div class="eyebrow" style="color:var(--muted)">IMPROVE · ABILITY</div><h2 id="abilityModalTitle" style="margin:6px 0 2px"></h2><div id="abilityModalThreshold" class="hint"></div><div class="summary" style="grid-template-columns:repeat(2,1fr);margin-top:18px"><div class="sum"><b id="abilityCurrent">—</b><small>当前成绩</small></div><div class="sum"><b id="abilityPB">—</b><small>历史 PB</small></div></div><div class="field"><label id="abilityInputLabel">新测试成绩</label><input id="abilityInput" inputmode="decimal" placeholder="输入成绩"></div><div class="field" style="margin-top:10px"><label>测试日期</label><input id="abilityDate" type="date"></div><div style="margin-top:14px"><button class="save" style="width:100%" onclick="saveAbilityTest()">保存本次测试</button></div><div class="section-title"><h2>最近3次测试</h2><span>可修改 / 删除</span></div><div id="abilityRecentTests"></div></div></div>
+<div class="modal" id="settingsModal"><div class="sheet"><button class="close" onclick="closeModal('settingsModal')">×</button><h2>设置</h2><div class="field"><label>首页显示名称</label><input id="nameInput"></div><button class="save" style="margin-top:10px" onclick="saveSettings()">保存名称</button><div class="section-title"><h2>数据管理</h2><span>IMPORT · EXPORT</span></div><p class="hint" style="margin-top:-4px">只有两个入口。导出文件既是你的可读档案，也是标准导入模板。</p><div class="data-actions"><button class="data-action" onclick="exportAllData()"><b>↓ 导出数据</b><span class="hint">ZIP · Excel 数据目录 + Photos 原始照片（永久ID绑定）</span></button><button class="data-action" onclick="el('unifiedImportInput').click()"><b>↑ 导入数据</b><span class="hint">支持 Momentum ZIP 或 Excel；照片按记录ID自动归位；支持系统重新压缩后的外层文件夹</span></button></div><div class="detailbox" style="margin-top:14px"><b>如何批量录入？</b><div class="hint" style="margin-top:5px">先点「导出数据」获得标准 Momentum_Data.xlsx。训练记录和身体档案都有永久「记录ID」；ZIP 内 Photos 文件夹按这个 ID 归档，因此 Excel 排序、移动行都不会打乱照片归属。</div></div><div class="section-title" style="margin-top:26px"><h2 style="color:#b5261e">危险操作</h2><span>不可撤销</span></div><button class="data-action" style="width:100%;background:#fff0ef;color:#b5261e" onclick="clearAllFitnessData()"><b>清除全部数据</b><span class="hint">删除训练、计划、能力测试、身体档案与全部照片；保留显示名称</span></button><input id="unifiedImportInput" type="file" accept=".zip,.xlsx,.xls" hidden onchange="previewUnifiedImport(event)"><div id="importPreview" class="import-preview" style="display:none"></div></div></div>
+<div class="modal" id="bodyEntryModal"><div class="sheet"><button class="close" onclick="closeModal('bodyEntryModal')">×</button><div class="eyebrow" style="color:var(--muted)">BODY ARCHIVE</div><h2 id="bodyEntryTitle">新增身体档案</h2><input id="bodyEntryId" type="hidden"><div class="formgrid"><div class="field"><label>日期</label><input id="bodyDate" type="date"></div><div class="field"><label>体重 kg</label><input id="bodyWeight" type="number" step="0.1"></div><div class="field"><label>体脂率 %</label><input id="bodyFat" type="number" step="0.1"></div><div class="field"><label>肩宽 cm</label><input id="bodyShoulder" type="number" step="0.1"></div><div class="field"><label>胸围 cm</label><input id="bodyChest" type="number" step="0.1"></div><div class="field"><label>腰围 cm</label><input id="bodyWaist" type="number" step="0.1"></div><div class="field"><label>臀围 cm</label><input id="bodyHip" type="number" step="0.1"></div><div class="field"><label>左 / 右上臂 cm</label><div style="display:flex;gap:6px"><input id="bodyArmL" type="number" step="0.1"><input id="bodyArmR" type="number" step="0.1"></div></div><div class="field"><label>左 / 右大腿 cm</label><div style="display:flex;gap:6px"><input id="bodyThighL" type="number" step="0.1"><input id="bodyThighR" type="number" step="0.1"></div></div><div class="field"><label>左 / 右小腿 cm</label><div style="display:flex;gap:6px"><input id="bodyCalfL" type="number" step="0.1"><input id="bodyCalfR" type="number" step="0.1"></div></div><div class="field full"><label>备注</label><textarea id="bodyNote" rows="2"></textarea></div></div><div class="section-title"><h2>阶段照片</h2><span>任意数量 · 可选</span></div><div id="bodyPhotoGrid" class="thumb-grid"></div><label class="photo-add">＋ 添加照片<input id="bodyPhotoInput" type="file" accept="image/*" multiple hidden onchange="addBodyPhotos(event)"></label><button class="save" style="width:100%;margin-top:16px" onclick="saveBodyEntry()">保存身体档案</button><button id="deleteBodyEntryBtn" class="danger" style="display:none;width:100%;border:0;border-radius:999px;padding:12px 18px;font-weight:750;margin-top:10px" onclick="deleteBodyEntry()">删除此档案</button></div></div><div class="modal" id="backfillModal"><div class="sheet"><button class="close" onclick="closeBackfill()">×</button><div class="eyebrow" style="color:var(--muted)">TRACK · BACKFILL</div><h2>补录训练</h2><div class="hint" style="margin-bottom:14px">用于补录过去已经完成的训练。保存后进入训练统计与历史记录，不改变今天 TODAY 的完成状态。</div><div class="formgrid"><div class="field"><label>训练日期</label><input id="bfDate" type="date"></div><div class="field"><label>训练分类</label><select id="bfType" onchange="renderBackfillFields()"><option>有氧</option><option>力量</option><option>技能</option></select></div><div class="field full"><label>项目名称</label><input id="bfName" list="bfNameList" placeholder="例如：跑步、徒步、引体向上"><datalist id="bfNameList"></datalist></div></div><div id="bfDynamic"></div><div class="field" style="margin-top:12px"><label>训练感受</label><textarea id="bfFeeling" rows="3" placeholder="这次训练感觉如何？"></textarea></div><div class="today-photo-box"><label class="photo-add">＋ 添加训练照片<input id="bfPhotoInput" type="file" accept="image/*" multiple hidden onchange="addBackfillPhotos(event)"></label><div id="bfPhotoGrid" class="today-photo-grid"></div></div><button class="save" style="width:100%;margin-top:16px;padding:14px" onclick="saveBackfill()">保存补录训练</button></div></div><div class="viewer" id="photoViewer"><button class="vclose" onclick="closePhotoViewer()">×</button><img id="viewerImg"><div class="vtools"><button onclick="zoomPhoto(-.25)">－</button><button onclick="zoomPhoto(.25)">＋</button><button onclick="resetPhotoZoom()">1:1</button></div></div><script>
+const $=s=>document.querySelector(s); const el=id=>document.getElementById(id); const todayISO=()=>{let d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};let state=JSON.parse(localStorage.getItem('momentumStateV2')||'{}');state.name??='YK';state.custom??=[];state.workouts??=[];state.body??=[];state.bodyArchive??=[];state.plan??={start:todayISO(),theme:'基础恢复周',goal:'恢复跑步节奏 · 稳定完成训练',days:Array.from({length:7},()=>[])}; if(!Array.isArray(state.plan.days))state.plan.days=Array.from({length:7},()=>[]);state.plan.weeks??=[];if(!state.plan.weeks.length){for(let i=0;i<state.plan.days.length;i+=7)state.plan.weeks.push({theme:i===0?(state.plan.theme||'本周训练'):`第 ${Math.floor(i/7)+1} 周训练`,goal:i===0?(state.plan.goal||''):'',days:state.plan.days.slice(i,i+7).concat(Array.from({length:Math.max(0,7-state.plan.days.slice(i,i+7).length)},()=>[]))});}function syncLegacyDays(){state.plan.days=state.plan.weeks.flatMap(w=>w.days);state.plan.theme=state.plan.weeks[0]?.theme||'';state.plan.goal=state.plan.weeks[0]?.goal||''}syncLegacyDays();
+const defaults={有氧:['跑步','快走','徒步','越野跑','骑行','公路骑行','山地骑行','游泳','划船','皮划艇','羽毛球','乒乓球','网球','篮球','足球','排球','棒球','垒球','橄榄球','高尔夫','跳绳','滑冰','轮滑','滑雪','越野滑雪','冲浪','帆船','攀岩','拳击','武术','瑜伽','舞蹈'],力量:['引体向上','辅助引体','俯卧撑','卧推','深蹲','硬拉','划船','肩推','双杠臂屈伸','弓步','臀桥','平板支撑','农夫行走'],技能:['倒立','L-sit','团身','滑雪','冲浪','滑板','攀岩','瑜伽','体操','跳舞','练字']};
+const emojiMap={'跑步':'🏃','快走':'🚶','徒步':'🥾','越野跑':'🏃','骑行':'🚴','公路骑行':'🚴','山地骑行':'🚵','游泳':'🏊','划船':'🚣','皮划艇':'🛶','羽毛球':'🏸','乒乓球':'🏓','网球':'🎾','篮球':'🏀','足球':'⚽','排球':'🏐','棒球':'⚾','垒球':'🥎','橄榄球':'🏉','高尔夫':'🏌️','跳绳':'🤸','滑冰':'⛸️','轮滑':'🛼','滑雪':'⛷️','越野滑雪':'🎿','冲浪':'🏄','帆船':'⛵','攀岩':'🧗','拳击':'🥊','武术':'🥋','瑜伽':'🧘','舞蹈':'💃','引体向上':'💪','辅助引体':'💪','俯卧撑':'💪','卧推':'🏋️','深蹲':'🏋️','硬拉':'🏋️','划船':'🏋️','肩推':'🏋️','双杠臂屈伸':'💪','弓步':'🏋️','臀桥':'🏋️','平板支撑':'🧱','农夫行走':'🏋️','倒立':'🤸','L-sit':'🤸','团身':'🤸','滑板':'🛹','体操':'🤸','跳舞':'💃','练字':'✍️'};
+const emojiChoices=['🏃','🚶','🥾','🚴','🚵','🏊','🚣','🛶','🏸','🏓','🎾','🏀','⚽','🏐','⚾','🥎','🏉','🏈','🏌️','🤸','⛸️','🛼','⛷️','🎿','🏂','🏄','⛵','🧗','🥊','🥋','🤼','🤺','🏋️','💪','🧘','💃','🛹','🧱','🎯','🏹','🎳','🎱','🥏','✍️'];
+function taskEmoji(t){let c=(state.custom||[]).find(x=>x.name===t.name);return t.emoji||(c&&c.emoji)||emojiMap[t.name]||(t.type==='力量'?'🏋️':t.type==='技能'?'🤸':'🏃')}
+function emojiFor(name,type){const c=(state.custom||[]).find(x=>x.name===name);return (c&&c.emoji)||emojiMap[name]||(type==='力量'?'🏋️':type==='技能'?'🤸':'🏅')}
+const abilityDefs=[
+{id:'5k',short:'5K',name:'5000 m',unit:'mm:ss',better:'low',thresholds:[1800,1500,1260],thresholdText:'30:00 / 25:00 / 21:00'},
+{id:'1k',short:'1K',name:'1000 m',unit:'mm:ss',better:'low',thresholds:[240,215,190],thresholdText:'4:00 / 3:35 / 3:10'},
+{id:'100m',short:'100M',name:'100 m',unit:'s',better:'low',thresholds:[16,14.5,13],thresholdText:'16.0 / 14.5 / 13.0 s'},
+{id:'longjump',short:'跳远',name:'立定跳远',unit:'m',better:'high',thresholds:[2.10,2.40,2.65],thresholdText:'2.10 / 2.40 / 2.65 m'},
+{id:'vertical',short:'纵跳',name:'垂直跳',unit:'cm',better:'high',thresholds:[40,50,65],thresholdText:'40 / 50 / 65 cm'},
+{id:'pullup',short:'引体',name:'标准引体',unit:'次',better:'high',thresholds:[5,10,17],thresholdText:'5 / 10 / 17 次'},
+{id:'pushup',short:'俯卧撑',name:'1min俯卧撑',unit:'次',better:'high',thresholds:[25,40,60],thresholdText:'25 / 40 / 60 次'},
+{id:'squat',short:'深蹲',name:'深蹲1RM/BW',unit:'×BW',better:'high',thresholds:[1,1.5,2],thresholdText:'1.0 / 1.5 / 2.0× BW'},
+{id:'deadlift',short:'硬拉',name:'硬拉1RM/BW',unit:'×BW',better:'high',thresholds:[1.25,1.75,2.25],thresholdText:'1.25 / 1.75 / 2.25× BW'},
+{id:'shuttle',short:'敏捷',name:'5-10-5',unit:'s',better:'low',thresholds:[5.2,4.8,4.4],thresholdText:'5.2 / 4.8 / 4.4 s'},
+{id:'balance',short:'平衡',name:'闭眼单腿',unit:'s',better:'high',thresholds:[15,30,60],thresholdText:'15 / 30 / 60 s'},
+{id:'plank',short:'核心',name:'平板支撑',unit:'s',better:'high',thresholds:[60,120,180],thresholdText:'60 / 120 / 180 s'}];
+state.abilities??={}; abilityDefs.forEach(a=>state.abilities[a.id]??={tests:[],pb:null,pbDate:null}); let activeAbilityId=null;let activeSession=[];
+function persist(){localStorage.setItem('momentumStateV2',JSON.stringify(state))}function fmtDate(d){return new Intl.DateTimeFormat('zh-CN',{year:'numeric',month:'long',day:'numeric',weekday:'long'}).format(d)}function addDays(iso,n){let d=new Date(iso+'T12:00:00');d.setDate(d.getDate()+n);return d}function go(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));const target=el(id);if(!target){alert('页面加载失败：'+id);return}target.classList.add('active');window.scrollTo(0,0)}
+function init(){customEmoji.innerHTML=emojiChoices.map(e=>`<option>${e}</option>`).join('');displayName.textContent=state.name;todayDate.textContent=fmtDate(new Date());renderMedals();renderAbilities();renderPlan();renderToday();renderWorkouts();renderStats()}
+function parseAbilityValue(def,v){if(def.unit==='mm:ss'){let z=String(v).trim().split(':');if(z.length===2)return (+z[0]*60)+(+z[1]);return +v||null}return +v||null}
+function formatAbilityValue(def,v){if(v==null||v==='')return '—';if(def.unit==='mm:ss'){let n=Math.round(+v),m=Math.floor(n/60),sec=n%60;return `${m}:${String(sec).padStart(2,'0')}`}if(def.unit==='×BW')return `${(+v).toFixed(2)}×`;if(def.unit==='m')return `${(+v).toFixed(2)} m`;return `${v} ${def.unit}`}
+function medalFor(def,v){if(v==null)return 'lock';let [b,s,g]=def.thresholds;if(def.better==='low'){if(v<=g)return 'gold';if(v<=s)return 'silver';if(v<=b)return 'bronze'}else{if(v>=g)return 'gold';if(v>=s)return 'silver';if(v>=b)return 'bronze'}return 'lock'}
+function currentAbility(def){let a=state.abilities[def.id];return a.tests?.length?a.tests[0].value:null}
+function recomputeAbilityPB(def){let a=state.abilities[def.id],vals=(a.testsAll||a.tests||[]);if(!vals.length){if(a.pb==null){a.pb=null;a.pbDate=null}return}let best=vals[0];for(let x of vals.slice(1)){if(def.better==='low'?x.value<best.value:x.value>best.value)best=x}if(a.pb==null||(def.better==='low'?best.value<a.pb:best.value>a.pb)){a.pb=best.value;a.pbDate=best.date}}
+function renderMedals(){medalGrid.innerHTML=abilityDefs.map(def=>{let a=state.abilities[def.id],m=medalFor(def,a.pb);return `<div class="medal"><div class="coin ${m}">${m==='lock'?'·':m==='gold'?'G':m==='silver'?'S':'B'}</div><label>${def.short}</label></div>`}).join('')}
+function renderAbilities(){abilityList.innerHTML=abilityDefs.map(def=>{let a=state.abilities[def.id],cur=currentAbility(def),m=medalFor(def,a.pb);return `<button class="ability" onclick="openAbility('${def.id}')"><div class="ability-meta"><b>${def.name}</b><span>${m==='gold'?'🥇':m==='silver'?'🥈':m==='bronze'?'🥉':'○'}</span></div><div class="score">${formatAbilityValue(def,cur)}</div><div class="ability-pb">PB ${formatAbilityValue(def,a.pb)} · ${def.thresholdText}</div></button>`}).join('');let ms=abilityDefs.map(d=>medalFor(d,state.abilities[d.id].pb)),bronze=ms.filter(x=>x!=='lock').length,silver=ms.filter(x=>x==='silver'||x==='gold').length,gold=ms.filter(x=>x==='gold').length;if(el('abilityMedalSummary'))el('abilityMedalSummary').textContent=`🥉+ ${bronze}/12 · 🥈+ ${silver}/12 · 🥇 ${gold}`}
+function openAbility(id){activeAbilityId=id;let def=abilityDefs.find(x=>x.id===id),a=state.abilities[id];el('abilityModalTitle').textContent=def.name;el('abilityModalThreshold').textContent=`铜 / 银 / 金：${def.thresholdText}`;el('abilityCurrent').textContent=formatAbilityValue(def,currentAbility(def));el('abilityPB').textContent=formatAbilityValue(def,a.pb);el('abilityInputLabel').textContent=`新测试成绩（${def.unit}）`;el('abilityInput').value='';el('abilityInput').placeholder=def.unit==='mm:ss'?'例如 24:36':'输入数值';el('abilityDate').value=todayISO();renderAbilityTests();el('abilityModal').classList.add('open')}
+function renderAbilityTests(){let def=abilityDefs.find(x=>x.id===activeAbilityId),a=state.abilities[activeAbilityId];el('abilityRecentTests').innerHTML=(a.tests||[]).length?a.tests.slice(0,3).map((t,i)=>`<div class="recentItem"><div class="row"><div><b>${formatAbilityValue(def,t.value)}</b><div class="hint">${t.date}</div></div><div class="record-actions"><button class="mini light" onclick="editAbilityTest(${i})">编辑</button><button class="danger" onclick="deleteAbilityTest(${i})">删除</button></div></div></div>`).join(''):'<div class="hint">还没有测试记录。</div>'}
+function saveAbilityTest(){let def=abilityDefs.find(x=>x.id===activeAbilityId),a=state.abilities[activeAbilityId],v=parseAbilityValue(def,el('abilityInput').value);if(v==null||!isFinite(v)||v<=0){alert('请输入有效成绩。');return}let t={id:Date.now(),date:el('abilityDate').value||todayISO(),value:v};a.testsAll=a.testsAll||[...(a.tests||[])];a.testsAll.unshift(t);a.testsAll.sort((x,y)=>y.date.localeCompare(x.date)||y.id-x.id);a.tests=a.testsAll.slice(0,3);if(a.pb==null||(def.better==='low'?v<a.pb:v>a.pb)){a.pb=v;a.pbDate=t.date}persist();renderAbilities();renderMedals();openAbility(activeAbilityId)}
+function editAbilityTest(i){let def=abilityDefs.find(x=>x.id===activeAbilityId),a=state.abilities[activeAbilityId],t=a.tests[i],raw=def.unit==='mm:ss'?formatAbilityValue(def,t.value):t.value,nv=prompt(`修改 ${def.name} 成绩`,raw);if(nv===null)return;let v=parseAbilityValue(def,nv);if(!v){alert('成绩格式无效');return}let all=a.testsAll||a.tests,real=all.find(x=>x.id===t.id);real.value=v;let nd=prompt('修改测试日期（YYYY-MM-DD）',t.date);if(nd)real.date=nd;a.testsAll=all.sort((x,y)=>y.date.localeCompare(x.date)||y.id-x.id);a.tests=a.testsAll.slice(0,3);a.pb=null;a.pbDate=null;for(let x of a.testsAll){if(a.pb==null||(def.better==='low'?x.value<a.pb:x.value>a.pb)){a.pb=x.value;a.pbDate=x.date}}persist();renderAbilities();renderMedals();openAbility(activeAbilityId)}
+function deleteAbilityTest(i){let def=abilityDefs.find(x=>x.id===activeAbilityId),a=state.abilities[activeAbilityId],t=a.tests[i];if(!confirm(`删除 ${t.date} 的 ${def.name} 测试吗？`))return;a.testsAll=(a.testsAll||a.tests).filter(x=>x.id!==t.id);a.tests=a.testsAll.slice(0,3);a.pb=null;a.pbDate=null;for(let x of a.testsAll){if(a.pb==null||(def.better==='low'?x.value<a.pb:x.value>a.pb)){a.pb=x.value;a.pbDate=x.date}}persist();renderAbilities();renderMedals();openAbility(activeAbilityId)}
+function currentDayIndex(){let s=new Date(state.plan.start+'T12:00:00'),t=new Date();t.setHours(12,0,0,0);let n=Math.round((t-s)/86400000);return n>=0&&n<state.plan.days.length?n:-1}
+function renderToday(){syncLegacyDays();let idx=currentDayIndex(),tasks=idx>=0?(state.plan.days[idx]||[]):[],wi=idx>=0?Math.floor(idx/7):-1;todayTitle.textContent='今日训练';todayTasks.innerHTML=tasks.length?tasks.map(t=>`<div class="pill"><b>${taskEmoji(t)} ${t.name}</b><small>${taskDesc(t)}</small></div>`).join(''):`<div class="pill"><b>今日无计划</b><small>可前往本周规划添加训练</small></div>`;applyDailyTodayColor()}
+function taskDesc(t){if(t.type==='力量')return `${t.sets.length} 组 · ${t.sets.map(s=>s.reps+'次').join(' / ')}`;if(t.type==='有氧')return `${t.distance?t.distance+' km':''}${t.minutes?' · '+t.minutes+' min':''}${t.note?' · '+t.note:''}`||'有氧训练';return `${t.minutes||'—'} min${t.note?' · '+t.note:''}`}
+function dayOffsetToday(){let s=new Date(state.plan.start+'T12:00:00'),t=new Date();t.setHours(12,0,0,0);return Math.floor((t-s)/86400000)}
+function weekCard(w,wi,history=false){let base=wi*7,start=addDays(state.plan.start,base),end=addDays(state.plan.start,base+6),todayOff=dayOffsetToday();let visible=w.days.map((tasks,di)=>({tasks,di,idx:base+di,date:addDays(state.plan.start,base+di)})).filter(x=>history?x.idx<todayOff:x.idx>=Math.max(0,todayOff));if(!visible.length)return '';return `<div class="weekBlock" style="margin-bottom:30px"><div class="section-title"><h2>第 ${wi+1} 周</h2><span>${start.getMonth()+1}.${start.getDate()} — ${end.getMonth()+1}.${end.getDate()}</span></div><div class="formgrid" style="margin-bottom:14px"><div class="field"><label>本周主题</label><input value="${(w.theme||'').replace(/"/g,'&quot;')}" ${history?'disabled':''} onchange="updateWeekMeta(${wi},'theme',this.value)"></div><div class="field"><label>本周目标</label><input value="${(w.goal||'').replace(/"/g,'&quot;')}" ${history?'disabled':''} onchange="updateWeekMeta(${wi},'goal',this.value)"></div></div>${visible.map(x=>`<div class="daycard"><div class="dayhead"><div><b>${x.idx===todayOff?'TODAY · ':''}${x.date.getMonth()+1}月${x.date.getDate()}日</b><div class="hint">${['周日','周一','周二','周三','周四','周五','周六'][x.date.getDay()]}</div></div>${history?'':`<div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end"><button class="mini light" onclick="shiftFromDay(${x.idx})">↘ 顺延</button><button class="mini dark" onclick="openAddPlan(${x.idx})">＋ 添加训练</button></div>`}</div>${x.tasks.length?x.tasks.map((t,j)=>`<div class="planTask"><div><b>${taskEmoji(t)} ${t.name}</b><small>${taskDesc(t)}</small></div>${history?'':`<button class="mini light" onclick="removePlanTask(${x.idx},${j})">删除</button>`}</div>`).join(''):'<div class="hint">休息 / 尚未安排训练</div>'}</div>`).join('')}</div>`}
+function renderPlan(){syncLegacyDays();let off=dayOffsetToday();days.innerHTML=state.plan.weeks.map((w,wi)=>weekCard(w,wi,false)).join('')||'<div class="hint">当前没有未来计划，点击「新增下一周」继续规划。</div>';historyDays.innerHTML=state.plan.weeks.map((w,wi)=>weekCard(w,wi,true)).join('')||'<div class="hint">暂无历史计划。</div>'}
+function updateWeekMeta(wi,key,value){state.plan.weeks[wi][key]=value;syncLegacyDays();persist();renderToday()}
+function addNextWeek(){state.plan.weeks.push({theme:`第 ${state.plan.weeks.length+1} 周训练`,goal:'',days:Array.from({length:7},()=>[])});syncLegacyDays();persist();renderPlan()}
+function toggleHistory(){let el=document.getElementById('historyWrap');el.style.display=el.style.display==='none'?'block':'none';if(el.style.display==='block')el.scrollIntoView({behavior:'smooth',block:'start'})}
+function shiftFromDay(i){if(!confirm(`把 ${addDays(state.plan.start,i).getMonth()+1}月${addDays(state.plan.start,i).getDate()}日及之后的计划整体顺延一天吗？`))return;state.plan.days.splice(i,0,[]);while(state.plan.days.length>state.plan.weeks.length*7)state.plan.weeks.push({theme:`第 ${state.plan.weeks.length+1} 周训练`,goal:'',days:Array.from({length:7},()=>[])});state.plan.weeks.forEach((w,wi)=>w.days=state.plan.days.slice(wi*7,wi*7+7));persist();renderPlan();renderToday()}
+function shiftToday(){let i=currentDayIndex();if(i<0){alert('今天不在当前规划周期内。');return}shiftFromDay(i)}
+function applyDailyTodayColor(){let card=document.querySelector('.today');if(!card)return;card.style.setProperty('--today-a','#172A46');card.style.setProperty('--today-b','#315A8A')}
+
+function openAddPlan(i){planDayIndex.value=i;planType.value='有氧';fillPlanNames();planDistance.value='';planMinutes.value='';skillMinutes.value='';planNote.value='';setPlans.innerHTML='';addSetPlan();togglePlanFields();addPlanModal.classList.add('open')}
+function fillPlanNames(){let type=planType.value,arr=[...defaults[type],...state.custom.filter(x=>x.type===type).map(x=>x.name)];planName.innerHTML=arr.map(x=>`<option>${x}</option>`).join('');togglePlanFields()}
+function togglePlanFields(){aerobicFields.style.display=planType.value==='有氧'?'block':'none';strengthFields.style.display=planType.value==='力量'?'block':'none';skillFields.style.display=planType.value==='技能'?'block':'none'}
+function addSetPlan(){let n=setPlans.children.length+1;setPlans.insertAdjacentHTML('beforeend',`<div class="setPlan"><input class="setWeight" placeholder="重量kg/辅助kg（可空）"><input class="setReps" type="number" value="5" placeholder="次数"><button class="mini light" onclick="this.parentElement.remove()">×</button></div>`)}
+function savePlanTask(){let type=planType.value,t={id:Date.now()+Math.random(),type,name:planName.value,note:planNote.value,status:'planned',emoji:(typeof planEmoji!=='undefined'&&planEmoji.value!=='自动匹配')?planEmoji.value:null};if(type==='有氧'){t.distance=+planDistance.value||0;t.minutes=+planMinutes.value||0}else if(type==='技能'){t.minutes=+skillMinutes.value||0}else{t.sets=[...document.querySelectorAll('#setPlans .setPlan')].map((r,i)=>({n:i+1,weight:+r.querySelector('.setWeight').value||null,reps:+r.querySelector('.setReps').value||0,status:'pending'}))}state.plan.days[+planDayIndex.value].push(t);persist();closeModal('addPlanModal');renderPlan();renderToday()}
+function removePlanTask(i,j){state.plan.days[i].splice(j,1);state.plan.weeks[Math.floor(i/7)].days[i%7]=state.plan.days[i];persist();renderPlan();renderToday()}
+function startToday(){
+  try{
+    syncLegacyDays();
+    const idx=currentDayIndex();
+    const tasks=idx>=0?(state.plan.days[idx]||[]):[];
+    if(idx<0){alert('今天不在当前规划周期内。请先在「本周规划」新增覆盖今天的计划周期。');go('plan');return}
+    if(!tasks.length){alert('今天还没有训练任务。请先在「本周规划」给今天添加训练。');go('plan');return}
+    activeSession=JSON.parse(JSON.stringify(tasks));
+    pendingTodayPhotos={};
+    activeSession.forEach(t=>{t.status='pending';t.ended=false;t.actual=t.actual||{};if(t.type==='有氧'){t.actual.distance=t.distance??'';t.actual.minutes=t.minutes??'';t.actual.rounds=t.rounds??''}if(t.type==='技能'){t.actual.minutes=t.minutes??''}if(t.type==='力量'){t.sets=(t.sets||[]);t.sets.forEach(s=>{s.status='pending';s.actualReps=s.reps;s.actualWeight=s.weight})}});saveActiveDraft();
+    renderExecute();
+    go('execute');
+  }catch(err){console.error(err);alert('开始训练时发生错误：'+err.message)}
+}
+function statusButtons(ti,si,status){return `<div class="statusBtns"><button class="status done ${status==='done'?'active':''}" onclick="setStatus(${ti},${si},'done')">✓ 完成</button><button class="status over ${status==='over'?'active':''}" onclick="setStatus(${ti},${si},'over')">↑ 超额完成</button><button class="status miss ${status==='miss'?'active':''}" onclick="setStatus(${ti},${si},'miss')">× 未完成</button></div>`}
+function esc(v){return String(v??'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;')}
+function setActual(ti,key,val){let t=activeSession[ti];t.actual=t.actual||{};t.actual[key]=val}
+function setSetActual(ti,si,key,val){let s=activeSession[ti].sets[si];s[key]=val}
+let pendingTodayPhotos={};
+function chooseTodayPhotos(ti,input){let files=[...(input.files||[])];input.value='';if(!files.length)return;pendingTodayPhotos[ti]=[...(pendingTodayPhotos[ti]||[]),...files];renderExecute()}
+function removeTodayPhoto(ti,pi){let arr=pendingTodayPhotos[ti]||[];arr.splice(pi,1);pendingTodayPhotos[ti]=arr;renderExecute()}
+function todayPhotoSection(ti){let arr=pendingTodayPhotos[ti]||[];let thumbs=arr.map((f,pi)=>`<div class="today-photo-thumb"><img src="${URL.createObjectURL(f)}"><button type="button" onclick="removeTodayPhoto(${ti},${pi})">×</button></div>`).join('');return `<div class="today-photo-box"><div class="row"><b>训练照片</b><span class="hint">${arr.length?arr.length+' 张待保存':'可选 · 支持多张'}</span></div>${thumbs?`<div class="today-photo-grid">${thumbs}</div>`:''}<label class="photo-add">＋ 添加训练照片<input type="file" accept="image/*" multiple style="display:none" onchange="chooseTodayPhotos(${ti},this)"></label></div>`}
+function projectFields(t,ti){
+  if(t.status==='pending')return '<div class="hint" style="margin-top:10px">先选择完成状态；计划值会自动带入，你只需要修改实际不同的地方。</div>';
+  let metrics=`<div class="compact-metrics" style="margin-top:12px"><div class="field"><label>平均心率</label><input type="number" placeholder="bpm" value="${esc(t.actual?.avgHr)}" oninput="setActual(${ti},'avgHr',this.value)"></div><div class="field"><label>最高心率</label><input type="number" placeholder="bpm" value="${esc(t.actual?.maxHr)}" oninput="setActual(${ti},'maxHr',this.value)"></div><div class="field"><label>RPE</label><input type="number" min="1" max="10" placeholder="1–10" value="${esc(t.actual?.rpe)}" oninput="setActual(${ti},'rpe',this.value)"></div></div>`;
+  let specific='';
+  if(t.type==='有氧') specific=`<div class="compact-metrics wide-training"><div class="field"><label>距离 km</label><input type="number" step="0.01" value="${esc(t.actual?.distance??t.distance??'')}" oninput="setActual(${ti},'distance',this.value)"></div><div class="field"><label>时长 min</label><input type="number" step="0.1" value="${esc(t.actual?.minutes??t.minutes??'')}" oninput="setActual(${ti},'minutes',this.value)"></div><div class="field"><label>组 / 轮</label><input type="number" value="${esc(t.actual?.rounds??t.rounds??'')}" oninput="setActual(${ti},'rounds',this.value)"></div></div>`;
+  if(t.type==='技能') specific=`<div class="compact-metrics wide-training"><div class="field"><label>练习 min</label><input type="number" step="0.1" value="${esc(t.actual?.minutes??t.minutes??'')}" oninput="setActual(${ti},'minutes',this.value)"></div></div><div class="field full" style="margin-top:10px"><label>本次达成阶段 / 里程碑</label><input value="${esc(t.actual?.milestone)}" placeholder="例如：靠墙倒立30秒" oninput="setActual(${ti},'milestone',this.value)"></div>`;
+  return metrics+specific+`<div class="field full" style="margin-top:10px"><label>训练感受</label><input value="${esc(t.actual?.feeling)}" placeholder="轻松 / 状态好 / 最后一组很吃力…" oninput="setActual(${ti},'feeling',this.value)"></div>`+todayPhotoSection(ti);
+}
+function setActualEditor(ti,key,val){setActual(ti,key,val)}
+function strengthSets(t,ti){
+  return `<div class="exercise"><div class="row"><b>组数 · 次数 · 重量</b><span class="hint">计划值已自动填入</span></div><div class="strength-sets">${t.sets.map((s,si)=>`<div class="strength-set"><b>SET ${si+1}</b><div class="field"><label>实际次数</label><input type="number" value="${esc(s.actualReps??s.reps)}" oninput="setSetActual(${ti},${si},'actualReps',this.value)"></div><div class="field"><label>重量 / 辅助 kg</label><input type="number" step="0.5" value="${esc(s.actualWeight??s.weight??'')}" oninput="setSetActual(${ti},${si},'actualWeight',this.value)"></div>${statusButtons(ti,si,s.status)}</div>`).join('')}</div></div>`
+}
+function renderExecute(){
+  el('executeArea').innerHTML=activeSession.map((t,ti)=>`<div class="workout-card" style="opacity:${t.ended?.78:1}"><div class="row"><div><div class="hint">${t.type}${t.ended?' · 已结束该项':''}</div><h2 style="margin:3px 0">${emojiFor(t.name,t.type)} ${t.name}</h2><div class="muted">计划：${taskDesc(t)}</div></div></div><div class="detailbox" style="margin-top:14px"><div class="row"><b>项目完成状态</b><span class="hint">${t.ended?'已保存':'选择后记录实际数据'}</span></div><div style="margin-top:9px">${statusButtons(ti,-1,t.status)}</div>${projectFields(t,ti)}</div>${t.type==='力量'?strengthSets(t,ti):''}<button class="end-item ${t.ended?'ended':''}" onclick="finishItem(${ti})">${t.ended?'✓ 该项已结束 · 点击可继续编辑':'结束该项'}</button></div>`).join('');
+  renderLiveSummary();
+}
+function setStatus(ti,si,status){
+  let t=activeSession[ti];t.ended=false;
+  if(si>=0){let s=t.sets[si];s.status=status;if(status==='done'||status==='over'){s.actualReps=s.actualReps??s.reps;s.actualWeight=s.actualWeight??s.weight}}
+  else{t.status=status;t.actual=t.actual||{};if(status==='done'||status==='over'){if(t.type==='有氧'){t.actual.distance=t.actual.distance??t.distance;t.actual.minutes=t.actual.minutes??t.minutes;t.actual.rounds=t.actual.rounds??t.rounds}if(t.type==='技能')t.actual.minutes=t.actual.minutes??t.minutes;if(t.type==='力量'){(t.sets||[]).forEach(s=>{if(s.status==='pending')s.status='done';s.actualReps=s.actualReps??s.reps;s.actualWeight=s.actualWeight??s.weight})}}}
+  saveActiveDraft();renderExecute();
+}
+function saveActiveDraft(){try{localStorage.setItem('fitness_active_session',JSON.stringify({date:todayISO(),tasks:activeSession}))}catch(e){}}
+function finishItem(ti){
+  let t=activeSession[ti];
+  if(t.ended){t.ended=false;saveActiveDraft();renderExecute();return}
+  if(t.status==='pending'){alert('请先选择这一项是完成、超额完成还是未完成。');return}
+  if(t.type==='力量'&&(t.sets||[]).some(s=>s.status==='pending')){if(!confirm('还有组没有确认状态。仍然结束这一项吗？'))return}
+  t.ended=true;saveActiveDraft();renderExecute();
+  if(activeSession.length&&activeSession.every(x=>x.ended))saveTodayComplete();
+}
+async function saveTodayComplete(){
+  let a=allStatuses(),idx=currentDayIndex(),wi=idx>=0?Math.floor(idx/7):-1,theme=wi>=0?(state.plan.weeks[wi]?.theme||'今日训练'):'今日训练';
+  let record={id:Date.now(),date:todayISO(),source:'plan',theme,tasks:JSON.parse(JSON.stringify(activeSession)),rpe:null,feeling:'',note:'',counts:{done:a.filter(x=>x==='done').length,over:a.filter(x=>x==='over').length,miss:a.filter(x=>x==='miss').length}};
+  state.workouts.unshift(record);if(idx>=0)state.plan.days[idx].forEach(t=>t.status='saved');persist();
+  try{for(let ti=0;ti<record.tasks.length;ti++){let files=pendingTodayPhotos[ti]||[];if(files.length)await addFiles(workoutOwner(record.id,ti),files)}}catch(err){console.error('保存训练照片失败',err);alert('训练数据已保存，但部分照片保存失败：'+err.message)}
+  pendingTodayPhotos={};localStorage.removeItem('fitness_active_session');renderWorkouts();renderStats();renderToday();
+  el('completeText').textContent=`今天共记录 ${activeSession.length} 个训练项目。做得不错，数据和训练照片已经保存。`;
+  el('todayCompleteModal').classList.add('open');
+}
+function closeCompleteAndHome(){closeModal('todayCompleteModal');go('home')}
+function closeCompleteAndRecord(){closeModal('todayCompleteModal');go('record')}
+function allStatuses(){return activeSession.map(t=>t.status)}
+function renderLiveSummary(){let a=allStatuses();el('liveSummary').innerHTML=[['✓',a.filter(x=>x==='done').length,'项目完成'],['↑',a.filter(x=>x==='over').length,'项目超额'],['×',a.filter(x=>x==='miss').length,'项目未完成'],['○',a.filter(x=>x==='pending').length,'待确认']].map(x=>`<div class="sum"><b>${x[0]} ${x[1]}</b><small>${x[2]}</small></div>`).join('')}
+function detailFields(tasks,prefix='edit'){return tasks.map((t,i)=>`<div class="detailbox"><div class="row"><h3>${emojiFor(t.name,t.type)} ${t.name}</h3><span class="hint">${t.status==='done'?'✓ 完成':t.status==='over'?'↑ 超额完成':t.status==='miss'?'× 未完成':'○ 待确认'}</span></div>${t.type==='力量'?`<div class="hint">${(t.sets||[]).map((s,j)=>`SET ${j+1}: 计划${s.reps}次 / 实际${s.actualReps??s.reps}次 · ${s.status==='done'?'✓':s.status==='over'?'↑':s.status==='miss'?'×':'○'}`).join('<br>')}</div>`:''}<div class="editgrid" style="margin-top:10px"><div class="field"><label>平均心率 bpm</label><input id="${prefix}AvgHr${i}" type="number" value="${esc(t.actual?.avgHr)}"></div><div class="field"><label>最高心率 bpm</label><input id="${prefix}MaxHr${i}" type="number" value="${esc(t.actual?.maxHr)}"></div><div class="field"><label>项目 RPE · 1–10</label><input id="${prefix}TaskRpe${i}" type="number" min="1" max="10" value="${esc(t.actual?.rpe)}"></div>${t.type==='有氧'?`<div class="field"><label>实际距离 km</label><input id="${prefix}Distance${i}" type="number" step="0.01" value="${esc(t.actual?.distance)}"></div><div class="field"><label>实际时长 min</label><input id="${prefix}Minutes${i}" type="number" step="0.1" value="${esc(t.actual?.minutes)}"></div><div class="field"><label>组 / 轮数</label><input id="${prefix}Rounds${i}" type="number" value="${esc(t.actual?.rounds)}"></div>`:t.type==='技能'?`<div class="field"><label>实际练习时间 min</label><input id="${prefix}Minutes${i}" type="number" step="0.1" value="${esc(t.actual?.minutes)}"></div><div class="field full"><label>本次达成阶段 / 里程碑</label><input id="${prefix}Milestone${i}" value="${esc(t.actual?.milestone)}"></div>`:''}<div class="field full"><label>这个项目的训练感受</label><input id="${prefix}Feeling${i}" value="${esc(t.actual?.feeling)}"></div></div></div>`).join('')}
+function collectDetails(tasks,prefix='edit'){tasks.forEach((t,i)=>{t.actual=t.actual||{};let v=id=>document.getElementById(id)?.value;t.actual.avgHr=+v(`${prefix}AvgHr${i}`)||null;t.actual.maxHr=+v(`${prefix}MaxHr${i}`)||null;t.actual.rpe=+v(`${prefix}TaskRpe${i}`)||null;t.actual.feeling=v(`${prefix}Feeling${i}`)||'';if(t.type==='有氧'){t.actual.distance=+v(`${prefix}Distance${i}`)||null;t.actual.minutes=+v(`${prefix}Minutes${i}`)||null;t.actual.rounds=+v(`${prefix}Rounds${i}`)||null}else if(t.type==='技能'){t.actual.minutes=+v(`${prefix}Minutes${i}`)||null;t.actual.milestone=v(`${prefix}Milestone${i}`)||''}})}
+function openFinishSummary(){let a=allStatuses();if(a.some(x=>x==='pending')&&!confirm('还有训练项目尚未确认。仍然结束训练吗？'))return;el('finishDetailFields').innerHTML=`<div class="hint">每个项目的数据已经在训练卡中记录。这里是保存前最后检查，也可以继续补充。</div>${detailFields(activeSession,'finish')}`;el('finishRpe').value='';el('finishFeeling').value='';el('finishNote').value='';el('finishSummaryModal').classList.add('open')}
+function saveFinishedTraining(){collectDetails(activeSession,'finish');let a=allStatuses(),idx=currentDayIndex(),wi=idx>=0?Math.floor(idx/7):-1,theme=wi>=0?(state.plan.weeks[wi]?.theme||'今日训练'):'今日训练';let record={id:Date.now(),date:todayISO(),source:'plan',theme,tasks:JSON.parse(JSON.stringify(activeSession)),rpe:+el('finishRpe').value||null,feeling:el('finishFeeling').value.trim(),note:el('finishNote').value.trim(),counts:{done:a.filter(x=>x==='done').length,over:a.filter(x=>x==='over').length,miss:a.filter(x=>x==='miss').length}};state.workouts.unshift(record);if(idx>=0)state.plan.days[idx].forEach(t=>t.status='saved');persist();closeModal('finishSummaryModal');renderWorkouts();renderStats();renderToday();go('stats');alert('训练已保存到「训练统计 · 最近记录」')}
+function finishTraining(){openFinishSummary()}
+function quickRecord(type){alert('这一版重点先打通“本周规划 → 今日训练 → 打勾 → 自动保存”。临时训练记录入口保留，下一轮再把它做成同一套执行器。')}
+function workoutMeta(w){let bits=[w.date,`✓${w.counts?.done||0} ↑${w.counts?.over||0} ×${w.counts?.miss||0}`];if(w.rpe)bits.push('RPE '+w.rpe);if(w.feeling)bits.push(w.feeling);return bits.join(' · ')}
+function renderWorkouts(){
+  const box=el('recentWorkouts'); if(!box)return;
+  box.innerHTML=state.workouts.length?state.workouts.slice(0,5).map(w=>`<button class="recentItem" style="width:100%;border:0;background:transparent;text-align:left" onclick="openWorkoutEditById('${w.id}')"><div class="row"><b>${esc(w.theme||'训练')}</b><span class="hint">查看 / 编辑 ›</span></div><span class="hint">${workoutMeta(w)}</span></button>`).join(''):'<span class="hint">还没有训练记录。</span>';
+  if(el('weekCount'))el('weekCount').textContent=state.workouts.length;
+}
+function openWorkoutEditById(id){
+  try{
+    const i=state.workouts.findIndex(w=>String(w.id)===String(id));
+    if(i<0){alert('没有找到这条训练记录。');return}
+    const w=state.workouts[i];
+    el('editWorkoutIndex').value=i;
+    el('editWorkoutFields').innerHTML=`<div class="hint" style="margin-bottom:10px">${esc(w.date)} · ${esc(w.theme||'训练')}</div>${detailFields(w.tasks||[],'edit')}<div class="editgrid"><div class="field"><label>整体 RPE · 1–10</label><input id="editRpe" type="number" min="1" max="10" value="${w.rpe??''}"></div><div class="field"><label>整场训练感受</label><input id="editFeeling" value="${esc(w.feeling||'')}"></div><div class="field full"><label>补充备注</label><textarea id="editNote" rows="3">${esc(w.note||'')}</textarea></div></div>`;
+    el('editWorkoutModal').classList.add('open');
+  }catch(err){console.error(err);alert('打开训练记录时发生错误：'+err.message)}
+}
+function openWorkoutEdit(i){const w=state.workouts[i];if(w)openWorkoutEditById(w.id)}
+function saveWorkoutEdit(){
+  try{
+    const i=+el('editWorkoutIndex').value,w=state.workouts[i];if(!w){alert('没有找到这条训练记录。');return}
+    collectDetails(w.tasks||[],'edit');
+    w.rpe=+el('editRpe').value||null;w.feeling=el('editFeeling').value.trim();w.note=el('editNote').value.trim();
+    persist();closeModal('editWorkoutModal');renderWorkouts();renderStats();alert('训练记录已更新');
+  }catch(err){console.error(err);alert('保存修改时发生错误：'+err.message)}
+}
+function renderStats(){statSessions.textContent=state.workouts.length;statDone.textContent=state.workouts.reduce((a,w)=>a+(w.counts?.done||0),0);statOver.textContent=state.workouts.reduce((a,w)=>a+(w.counts?.over||0),0);statMiss.textContent=state.workouts.reduce((a,w)=>a+(w.counts?.miss||0),0);statsRecent.innerHTML=state.workouts.length?state.workouts.slice(0,8).map(w=>`${w.date} · <b>${w.theme}</b> · ✓${w.counts.done} ↑${w.counts.over} ×${w.counts.miss}${w.rpe?' · RPE '+w.rpe:''}`).join('<br>'):'完成训练后，这里会形成你的趋势。'}
+async function clearAllFitnessData(){if(!confirm('确定要清除 Momentum 的全部数据吗？\n\n将删除训练记录、训练计划、身体能力测试、身体档案以及全部照片。此操作无法撤销。建议先导出数据。'))return;if(!confirm('最后确认：真的清除全部健身数据？'))return;const keepName=state.name||'YK';await photosClearAll();localStorage.removeItem('fitness_active_session');localStorage.removeItem('momentumTodayPalette');activeSession=[];pendingBodyFiles=[];state={name:keepName,custom:[],workouts:[],body:[],bodyArchive:[],completedDates:{},plan:{start:todayISO(),theme:'本周训练',goal:'',days:Array.from({length:7},()=>[]),weeks:[{theme:'本周训练',goal:'',days:Array.from({length:7},()=>[])}]},abilities:{}};abilityDefs.forEach(a=>state.abilities[a.id]={tests:[],testsAll:[],pb:null,pbDate:null});syncLegacyDays();persist();closeModal('settingsModal');displayName.textContent=state.name;renderMedals();renderAbilities();renderPlan();renderToday();renderWorkouts();renderStats();renderBodyArchive();go('home');alert('全部健身数据已清除。显示名称已保留。')}
+function openCustom(){customModal.classList.add('open')}function saveCustom(){if(!customName.value.trim())return;state.custom.push({name:customName.value.trim(),type:customType.value,emoji:(typeof customEmoji!=='undefined'?customEmoji.value:null)});emojiMap[customName.value.trim()]=(typeof customEmoji!=='undefined'?customEmoji.value:'🏃');persist();customName.value='';closeModal('customModal');alert('项目已创建，它会同时出现在规划和记录系统中。')}function openSettings(){nameInput.value=state.name;settingsModal.classList.add('open')}function saveSettings(){state.name=nameInput.value.trim()||'YK';persist();displayName.textContent=state.name;closeModal('settingsModal')}function closeModal(id){const m=el(id);if(m)m.classList.remove('open')}
+let statsRange='week',historyMode='date',editingItemRef=null;
+function completedDates(){return state.completedDates||(state.completedDates={})}
+function isTodayCompleted(){return !!completedDates()[todayISO()]}
+function reconcileTodayCompletion(){const hasToday=(state.workouts||[]).some(w=>w.date===todayISO()&&(w.tasks||[]).length);if(!hasToday&&completedDates()[todayISO()])delete completedDates()[todayISO()]}
+const _renderTodayBase=renderToday;
+renderToday=function(){
+  _renderTodayBase();
+  const btn=document.querySelector('.today-actions .primary');
+  if(isTodayCompleted()){
+    todayTasks.innerHTML='<div class="today-complete-pill"><b>✓ 今日训练已完成</b><div style="font-size:12px;opacity:.82;margin-top:4px">今天的训练已经保存到训练统计。</div></div>';
+    if(btn){btn.textContent='查看今日记录 →';btn.onclick=()=>go('stats')}
+  }else if(btn){btn.textContent='开始训练 →';btn.onclick=startToday}
+}
+const _saveTodayCompleteBase=saveTodayComplete;
+saveTodayComplete=function(){completedDates()[todayISO()]={completedAt:new Date().toISOString()};persist();_saveTodayCompleteBase();completedDates()[todayISO()]={completedAt:new Date().toISOString()};persist();renderToday()}
+const _saveFinishedTrainingBase=saveFinishedTraining;
+saveFinishedTraining=function(){completedDates()[todayISO()]={completedAt:new Date().toISOString()};persist();_saveFinishedTrainingBase();completedDates()[todayISO()]={completedAt:new Date().toISOString()};persist();renderToday()}
+const _startTodayBase=startToday;
+startToday=function(){if(isTodayCompleted()){go('stats');return}_startTodayBase()}
+function flattenItems(){
+  const out=[];state.workouts.forEach((w,wi)=>(w.tasks||[]).forEach((t,ti)=>out.push({w,wi,t,ti,key:String(w.id)+'_'+ti,date:w.date})));
+  return out.sort((a,b)=>(b.date||'').localeCompare(a.date||'') || b.wi-a.wi);
+}
+function itemMeta(x){const t=x.t,a=t.actual||{},bits=[];if(t.type==='有氧'){if(a.distance!=null)bits.push(Number(a.distance).toFixed(2).replace(/\.00$/,'')+' km');if(a.minutes)bits.push(a.minutes+' min')}if(t.type==='力量'){bits.push((t.sets||[]).length+' 组');const reps=(t.sets||[]).reduce((n,s)=>n+(+s.actualReps||0),0);if(reps)bits.push(reps+' 次')}if(t.type==='技能'&&a.minutes)bits.push(a.minutes+' min');if(a.avgHr)bits.push('♥ '+a.avgHr);if(a.rpe)bits.push('RPE '+a.rpe);if(a.feeling)bits.push(a.feeling);return bits.join(' · ')||'已记录'}
+function setStatsRange(r,btn){statsRange=r;document.querySelectorAll('#statsTabs .tab').forEach(x=>x.classList.remove('active'));if(btn)btn.classList.add('active');renderStats()}
+function rangeStart(r){let d=new Date(),x=new Date(d.getFullYear(),d.getMonth(),d.getDate());if(r==='week'){let day=(x.getDay()+6)%7;x.setDate(x.getDate()-day)}if(r==='month')x=new Date(d.getFullYear(),d.getMonth(),1);if(r==='quarter')x=new Date(d.getFullYear(),Math.floor(d.getMonth()/3)*3,1);if(r==='year')x=new Date(d.getFullYear(),0,1);return x}
+renderStats=function(){
+  const start=rangeStart(statsRange),items=flattenItems().filter(x=>new Date(x.date+'T12:00:00')>=start),sum=(id,v)=>{const n=el(id);if(n)n.textContent=v};
+  let mins=0,run=0,hike=0,asc=0,str=0,skill=0;items.forEach(x=>{let t=x.t,a=t.actual||{};mins+=+a.minutes||0;if(t.type==='力量')str+=(t.sets||[]).length;if(t.type==='技能')skill+=+a.minutes||0;if(/跑|Run/i.test(t.name))run+=+a.distance||0;if(/徒步|Hike/i.test(t.name)){hike+=+a.distance||0;asc+=+a.ascent||0}});
+  sum('statSessions',items.length);sum('statMinutes',Math.round(mins));sum('statRunKm',run.toFixed(1));sum('statStrengthSets',str);sum('statHikeKm',hike.toFixed(1));sum('statAscent',Math.round(asc));sum('statSkillMinutes',Math.round(skill));
+  const box=el('statsRecent');if(box)box.innerHTML=flattenItems().slice(0,7).map(x=>`<div class="recentItem"><div class="row"><div><b>${emojiFor(x.t.name,x.t.type)} ${esc(x.t.name)}</b><div class="hint">${esc(x.date)} · ${esc(itemMeta(x))}</div></div><div class="record-actions"><button onclick="openItemEdit('${x.w.id}',${x.ti})">编辑</button><button class="danger" onclick="deleteItem('${x.w.id}',${x.ti})">删除</button></div></div></div>`).join('')||'<span class="hint">还没有训练记录。</span>';
+  if(el('weekCount'))el('weekCount').textContent=flattenItems().length;
+}
+function openItemEdit(wid,ti){const wi=state.workouts.findIndex(w=>String(w.id)===String(wid));if(wi<0)return;const w=state.workouts[wi],t=w.tasks[ti];if(!t)return;editingItemRef={wid:String(wid),ti};el('editWorkoutIndex').value=wi;el('editWorkoutFields').innerHTML=`<div class="hint" style="margin-bottom:10px">${esc(w.date)} · ${emojiFor(t.name,t.type)} ${esc(t.name)}</div>${detailFields([t],'edit')} `;el('editWorkoutModal').classList.add('open')}
+saveWorkoutEdit=function(){try{if(editingItemRef){const wi=state.workouts.findIndex(w=>String(w.id)===editingItemRef.wid),w=state.workouts[wi];if(!w)return;const one=[w.tasks[editingItemRef.ti]];collectDetails(one,'edit');persist();closeModal('editWorkoutModal');editingItemRef=null;renderStats();renderHistory();return} }catch(err){alert('保存修改时发生错误：'+err.message)}}
+async function deleteItem(wid,ti){if(!confirm('确定删除这条训练项目记录吗？删除后相关统计会立即重新计算。'))return;const wi=state.workouts.findIndex(w=>String(w.id)===String(wid));if(wi<0)return;await photosDeleteOwner(workoutOwner(wid,ti));state.workouts[wi].tasks.splice(ti,1);if(!state.workouts[wi].tasks.length)state.workouts.splice(wi,1);reconcileTodayCompletion();persist();renderStats();renderHistory();renderWorkouts();renderToday()}
+function deleteCurrentWorkoutItem(){if(!editingItemRef)return;if(!confirm('确定删除这条训练项目记录吗？'))return;const r=editingItemRef;closeModal('editWorkoutModal');editingItemRef=null;deleteItem(r.wid,r.ti)}
+function openFullHistory(){renderHistory();go('history')}
+function setHistoryMode(m){historyMode=m;el('historyDateTab').classList.toggle('active',m==='date');el('historyProjectTab').classList.toggle('active',m==='project');renderHistory()}
+function historyCard(x){return `<div class="history-card"><div class="row"><div><b>${emojiFor(x.t.name,x.t.type)} ${esc(x.t.name)}</b><div class="hint">${esc(x.date)} · ${esc(itemMeta(x))}</div></div><div class="record-actions"><button onclick="openItemEdit('${x.w.id}',${x.ti})">编辑</button><button class="danger" onclick="deleteItem('${x.w.id}',${x.ti})">删除</button></div></div></div>`}
+function renderHistory(){const box=el('historyList');if(!box)return;const items=flattenItems();if(!items.length){box.innerHTML='<div class="panel hint">还没有训练记录。</div>';return}const groups={};items.forEach(x=>{const k=historyMode==='date'?x.date:x.t.name;(groups[k]||(groups[k]=[])).push(x)});box.innerHTML=Object.entries(groups).map(([k,v])=>`<div class="history-group"><h3>${esc(k)}</h3>${v.map(historyCard).join('')}</div>`).join('')}
+
+
+const APP_VERSION='0.2.12',BACKUP_SCHEMA=3,EXCEL_TEMPLATE_B64='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';
+function dlBlob(blob,name){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1000)}
+function downloadExcelTemplate(){const bin=atob(EXCEL_TEMPLATE_B64),u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);dlBlob(new Blob([u],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}),'Momentum_Import_Template.xlsx')}
+function csvEsc(v){v=String(v??'');return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v}
+function exportCSV(){let rows=[['日期','项目','分类','距离km','时长min','平均心率','最高心率','RPE','备注']];flattenItems().slice().reverse().forEach(x=>{let a=x.t.actual||{};rows.push([x.date,x.t.name,x.t.type,a.distance||'',a.minutes||'',a.avgHr||'',a.maxHr||'',a.rpe||'',a.feeling||x.t.note||''])});let text='\ufeff'+rows.map(r=>r.map(csvEsc).join(',')).join('\n');dlBlob(new Blob([text],{type:'text/csv;charset=utf-8'}),`Momentum_Training_${todayISO()}.csv`)}
+// Photo store: IndexedDB, shared by workout and body archive.
+let photoDBPromise=null;function photoDB(){if(photoDBPromise)return photoDBPromise;photoDBPromise=new Promise((res,rej)=>{let q=indexedDB.open('MomentumPhotos',1);q.onupgradeneeded=()=>{let db=q.result;if(!db.objectStoreNames.contains('photos')){let st=db.createObjectStore('photos',{keyPath:'id'});st.createIndex('owner','owner')}};q.onsuccess=()=>res(q.result);q.onerror=()=>rej(q.error)});return photoDBPromise}
+async function photoPut(rec){let db=await photoDB();return new Promise((res,rej)=>{let tx=db.transaction('photos','readwrite');tx.objectStore('photos').put(rec);tx.oncomplete=res;tx.onerror=()=>rej(tx.error)})}
+async function photosFor(owner){let db=await photoDB();return new Promise((res,rej)=>{let q=db.transaction('photos').objectStore('photos').index('owner').getAll(owner);q.onsuccess=()=>res(q.result||[]);q.onerror=()=>rej(q.error)})}
+async function photoDelete(id){let db=await photoDB();return new Promise((res,rej)=>{let tx=db.transaction('photos','readwrite');tx.objectStore('photos').delete(id);tx.oncomplete=res;tx.onerror=()=>rej(tx.error)})}
+async function photosDeleteOwner(owner){let ps=await photosFor(owner);for(const p of ps)await photoDelete(p.id)}
+async function photosClearAll(){let db=await photoDB();return new Promise((res,rej)=>{let tx=db.transaction('photos','readwrite');tx.objectStore('photos').clear();tx.oncomplete=res;tx.onerror=()=>rej(tx.error)})}
+async function allPhotos(){let db=await photoDB();return new Promise((res,rej)=>{let q=db.transaction('photos').objectStore('photos').getAll();q.onsuccess=()=>res(q.result||[]);q.onerror=()=>rej(q.error)})}
+function fileDataURL(f){return new Promise((res,rej)=>{let r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(f)})}
+async function addFiles(owner,files){for(const f of files){let data=await fileDataURL(f);await photoPut({id:Date.now()+'_'+Math.random().toString(36).slice(2),owner,name:f.name,type:f.type||'image/jpeg',createdAt:new Date().toISOString(),data})}}
+let viewerScale=1;function openPhotoViewer(src){el('viewerImg').src=src;viewerScale=1;el('viewerImg').style.transform='scale(1)';el('photoViewer').classList.add('open')}function closePhotoViewer(){el('photoViewer').classList.remove('open')}function zoomPhoto(d){viewerScale=Math.max(.5,Math.min(4,viewerScale+d));el('viewerImg').style.transform=`scale(${viewerScale})`}function resetPhotoZoom(){viewerScale=1;el('viewerImg').style.transform='scale(1)'}
+async function renderPhotoGrid(owner,boxId){const box=el(boxId);if(!box)return;let ps=await photosFor(owner);box.innerHTML=ps.map(p=>`<div class="thumb"><img src="${p.data}" onclick="openPhotoViewer(this.src)"><button onclick="event.stopPropagation();removePhoto('${p.id}','${owner}','${boxId}')">×</button></div>`).join('')}
+async function removePhoto(id,owner,box){if(!confirm('删除这张照片吗？'))return;await photoDelete(id);renderPhotoGrid(owner,box);renderBodyArchive()}
+function openBodyArchive(){renderBodyArchive();go('bodyArchive')}
+function bodyOwner(id){return 'body:'+id}function workoutOwner(wid,ti){return 'workout:'+wid+':'+ti}
+async function renderBodyArchive(){const box=el('bodyArchiveList');if(!box)return;let arr=[...(state.bodyArchive||[])].sort((a,b)=>b.date.localeCompare(a.date));if(!arr.length){box.innerHTML='<div class="panel hint">还没有身体档案。点击「新增记录」，从任意一天开始。</div>';return}let html='';for(const r of arr){let n=(await photosFor(bodyOwner(r.id))).length;let bits=[];if(r.weight)bits.push(r.weight+' kg');if(r.bodyFat)bits.push(r.bodyFat+'%');if(r.waist)bits.push('腰 '+r.waist+' cm');html+=`<button class="archive-card" onclick="openBodyEntry('${r.id}')"><div class="row"><div><h3>${r.date}</h3><div class="hint">${bits.join(' · ')||'已记录身体数据'}</div></div><b>📷 ${n}</b></div></button>`}box.innerHTML=html}
+function setVal(id,v){if(el(id))el(id).value=v??''}function getNum(id){let v=el(id).value;return v===''?null:+v}
+async function openBodyEntry(id=''){let r=id?(state.bodyArchive||[]).find(x=>String(x.id)===String(id)):null;el('bodyEntryId').value=r?.id||'';el('bodyEntryTitle').textContent=r?'身体档案 · '+r.date:'新增身体档案';el('deleteBodyEntryBtn').style.display=r?'block':'none';setVal('bodyDate',r?.date||todayISO());[['bodyWeight','weight'],['bodyFat','bodyFat'],['bodyShoulder','shoulder'],['bodyChest','chest'],['bodyWaist','waist'],['bodyHip','hip'],['bodyArmL','armL'],['bodyArmR','armR'],['bodyThighL','thighL'],['bodyThighR','thighR'],['bodyCalfL','calfL'],['bodyCalfR','calfR'],['bodyNote','note']].forEach(([i,k])=>setVal(i,r?.[k]));el('bodyEntryModal').classList.add('open');if(r)renderPhotoGrid(bodyOwner(r.id),'bodyPhotoGrid');else el('bodyPhotoGrid').innerHTML=''}
+async function deleteBodyEntry(){let id=el('bodyEntryId').value;if(!id)return;let r=(state.bodyArchive||[]).find(x=>String(x.id)===String(id));if(!r)return;if(!confirm(`确定删除 ${r.date} 的身体档案吗？该档案的全部照片也会一并删除，且无法撤销。`))return;await photosDeleteOwner(bodyOwner(id));state.bodyArchive=state.bodyArchive.filter(x=>String(x.id)!==String(id));persist();closeModal('bodyEntryModal');await renderBodyArchive()}
+async function saveBodyEntry(){let id=el('bodyEntryId').value||('b'+Date.now()),r={id,date:el('bodyDate').value||todayISO(),weight:getNum('bodyWeight'),bodyFat:getNum('bodyFat'),shoulder:getNum('bodyShoulder'),chest:getNum('bodyChest'),waist:getNum('bodyWaist'),hip:getNum('bodyHip'),armL:getNum('bodyArmL'),armR:getNum('bodyArmR'),thighL:getNum('bodyThighL'),thighR:getNum('bodyThighR'),calfL:getNum('bodyCalfL'),calfR:getNum('bodyCalfR'),note:el('bodyNote').value.trim()};let i=state.bodyArchive.findIndex(x=>String(x.id)===String(id));if(i>=0)state.bodyArchive[i]=r;else state.bodyArchive.push(r);persist();el('bodyEntryId').value=id;await flushPendingBodyPhotos(id);closeModal('bodyEntryModal');renderBodyArchive()}
+let pendingBodyFiles=[];async function addBodyPhotos(e){let id=el('bodyEntryId').value;if(!id){pendingBodyFiles.push(...e.target.files);el('bodyPhotoGrid').innerHTML=`<div class="hint">已选择 ${pendingBodyFiles.length} 张，保存档案后写入。</div>`}else{await addFiles(bodyOwner(id),e.target.files);renderPhotoGrid(bodyOwner(id),'bodyPhotoGrid')}e.target.value=''}async function flushPendingBodyPhotos(id){if(pendingBodyFiles.length){await addFiles(bodyOwner(id),pendingBodyFiles);pendingBodyFiles=[]}}
+async function addWorkoutPhotos(e){if(!editingItemRef)return;await addFiles(workoutOwner(editingItemRef.wid,editingItemRef.ti),e.target.files);e.target.value='';renderWorkoutPhotos()}async function renderWorkoutPhotos(){if(!editingItemRef)return;renderPhotoGrid(workoutOwner(editingItemRef.wid,editingItemRef.ti),'workoutPhotoGrid')}
+const _openItemEditPhoto=openItemEdit;openItemEdit=function(wid,ti){_openItemEditPhoto(wid,ti);setTimeout(renderWorkoutPhotos,0)}
+function ensureRecordIds(){
+  let changed=false;
+  (state.workouts||[]).forEach(w=>(w.tasks||[]).forEach(t=>{if(!t.recordId){t.recordId='W_'+Date.now().toString(36).toUpperCase()+'_'+Math.random().toString(36).slice(2,7).toUpperCase();changed=true}}));
+  (state.bodyArchive||[]).forEach(r=>{if(!r.recordId){r.recordId='B_'+Date.now().toString(36).toUpperCase()+'_'+Math.random().toString(36).slice(2,7).toUpperCase();changed=true}});
+  if(changed)persist();
+}
+function readablePhotoFolder(kind,date,label,rid){
+  const d=String(date||'未注明日期').slice(0,10),name=safeFileName(label|| (kind==='body'?'身体档案':'训练'));
+  return kind==='body'?`${d}_身体档案__${rid}`:`${d}_${name}__${rid}`
+}
+function buildExcelWorkbook(){
+  ensureRecordIds();
+  const training=[];
+  (state.workouts||[]).forEach(w=>(w.tasks||[]).forEach((t,ti)=>training.push({
+    '记录ID':t.recordId,'日期':w.date||'', '项目名称':t.name||'', '分类':t.type||'',
+    '距离_km':t.actual?.distance??t.distance??'', '时长_min':t.actual?.minutes??t.minutes??'',
+    '平均心率':t.actual?.avgHr??'', '最高心率':t.actual?.maxHr??'', 'RPE':t.actual?.rpe??'', '爬升_m':t.actual?.ascent??t.ascent??'',
+    '备注':t.actual?.feeling||t.note||'', '照片目录':`Photos/Workouts/${t.recordId}/`
+  })));
+  const plans=[]; syncLegacyDays();
+  (state.plan.days||[]).forEach((tasks,idx)=>(tasks||[]).forEach(t=>{const d=addDays(state.plan.start,idx);plans.push({
+    '日期':`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`,
+    '项目名称':t.name||'', '分类':t.type||'', '计划距离_km':t.distance??'', '计划时长_min':t.minutes??'', '计划备注':t.note||''
+  })}));
+  const bodies=(state.bodyArchive||[]).map(r=>({'记录ID':r.recordId,'日期':r.date||'','体重_kg':r.weight??'','体脂率_pct':r.bodyFat??'','肩宽_cm':r.shoulder??'','胸围_cm':r.chest??'','腰围_cm':r.waist??'','臀围_cm':r.hip??'','左上臂_cm':r.armL??'','右上臂_cm':r.armR??'','左大腿_cm':r.thighL??'','右大腿_cm':r.thighR??'','左小腿_cm':r.calfL??'','右小腿_cm':r.calfR??'','备注':r.note||'','照片目录':`Photos/Body/${r.recordId}/`}));
+  const abilityRows=[];
+  abilityDefs.forEach(def=>{const a=state.abilities?.[def.id]||{};const tests=a.testsAll||a.tests||[];tests.forEach(t=>abilityRows.push({'日期':t.date||'','能力ID':def.id,'项目':def.name,'成绩':formatAbilityValue(def,t.value),'单位':def.unit||''}))});
+  const wb=XLSX.utils.book_new();
+  const specs=[
+    ['训练记录',training,['记录ID','日期','项目名称','分类','距离_km','时长_min','平均心率','最高心率','RPE','爬升_m','备注','照片目录']],
+    ['训练计划',plans,['日期','项目名称','分类','计划距离_km','计划时长_min','计划备注']],
+    ['身体档案',bodies,['记录ID','日期','体重_kg','体脂率_pct','肩宽_cm','胸围_cm','腰围_cm','臀围_cm','左上臂_cm','右上臂_cm','左大腿_cm','右大腿_cm','左小腿_cm','右小腿_cm','备注','照片目录']],
+    ['身体能力',abilityRows,['日期','能力ID','项目','成绩','单位']]
+  ];
+  specs.forEach(([name,rows,headers])=>{const ws=XLSX.utils.json_to_sheet(rows,{header:headers});ws['!cols']=headers.map(h=>({wch:h==='照片目录'?34:h==='记录ID'?22:14}));XLSX.utils.book_append_sheet(wb,ws,name)});return wb
+}
+function safeFileName(s){return String(s||'photo').replace(/[\\/:*?"<>|]/g,'_').replace(/\s+/g,'_').slice(0,80)}
+function dataURLBytes(url){const i=url.indexOf(','),meta=url.slice(0,i),body=url.slice(i+1);if(meta.includes(';base64')){const b=atob(body),u=new Uint8Array(b.length);for(let j=0;j<b.length;j++)u[j]=b.charCodeAt(j);return u}return new TextEncoder().encode(decodeURIComponent(body))}
+function crc32(u){let c=0xffffffff;for(const b of u){c^=b;for(let k=0;k<8;k++)c=(c>>>1)^((c&1)?0xedb88320:0)}return (c^0xffffffff)>>>0}
+function u16(n){return [n&255,(n>>>8)&255]}function u32(n){return [n&255,(n>>>8)&255,(n>>>16)&255,(n>>>24)&255]}
+function makeStoreZip(entries){const enc=new TextEncoder(),locals=[],centrals=[];let off=0;for(const e of entries){const name=enc.encode(e.name),data=e.data instanceof Uint8Array?e.data:new Uint8Array(e.data),crc=crc32(data);const lh=new Uint8Array([...u32(0x04034b50),...u16(20),...u16(0x800),...u16(0),...u16(0),...u16(0),...u32(crc),...u32(data.length),...u32(data.length),...u16(name.length),...u16(0),...name]);locals.push(lh,data);const ch=new Uint8Array([...u32(0x02014b50),...u16(20),...u16(20),...u16(0x800),...u16(0),...u16(0),...u16(0),...u32(crc),...u32(data.length),...u32(data.length),...u16(name.length),...u16(0),...u16(0),...u16(0),...u16(0),...u32(0),...u32(off),...name]);centrals.push(ch);off+=lh.length+data.length}const csize=centrals.reduce((n,x)=>n+x.length,0),end=new Uint8Array([...u32(0x06054b50),...u16(0),...u16(0),...u16(entries.length),...u16(entries.length),...u32(csize),...u32(off),...u16(0)]);return new Blob([...locals,...centrals,end],{type:'application/zip'})}
+function extForPhoto(p){let n=(p.name||'').match(/\.([a-zA-Z0-9]{2,5})$/)?.[1];if(n)return n.toLowerCase();return p.type==='image/png'?'png':p.type==='image/webp'?'webp':'jpg'}
+function ownerRecordId(owner){
+  if(!owner)return null;
+  if(owner.startsWith('body:')){let old=owner.slice(5),r=(state.bodyArchive||[]).find(x=>String(x.id)===String(old));return r?.recordId||null}
+  if(owner.startsWith('workout:')){let z=owner.split(':'),w=(state.workouts||[]).find(x=>String(x.id)===String(z[1])),t=w?.tasks?.[+z[2]];return t?.recordId||null}
+  return null
+}
+async function exportAllData(){
+  if(typeof XLSX==='undefined'){alert('Excel 组件尚未加载。请保持联网并重新打开页面后再导出。');return}
+  try{
+    ensureRecordIds();
+    const wb=buildExcelWorkbook(),xlsx=new Uint8Array(XLSX.write(wb,{bookType:'xlsx',type:'array'})),photos=await allPhotos(),entries=[{name:'Momentum_Data.xlsx',data:xlsx}];
+    const counters={};
+    for(const p of photos){let rid=ownerRecordId(p.owner);if(!rid)continue;let isBody=p.owner.startsWith('body:'),kind=isBody?'身体档案照片':'训练照片',date='',label='训练';if(isBody){let old=p.owner.slice(5),r=(state.bodyArchive||[]).find(x=>String(x.id)===String(old));date=r?.date||'';label='身体档案'}else{let z=p.owner.split(':'),w=(state.workouts||[]).find(x=>String(x.id)===String(z[1])),t=w?.tasks?.[+z[2]];date=w?.date||'';label=t?.name||'训练'}let folder=readablePhotoFolder(isBody?'body':'workout',date,label,rid),key=kind+'/'+folder,c=(counters[key]=(counters[key]||0)+1),name=`Photos/${kind}/${folder}/${String(c).padStart(3,'0')}_${safeFileName(p.name||'photo')}.${extForPhoto(p)}`;entries.push({name,data:dataURLBytes(p.data)})}
+    entries.push({name:'Photos/说明.txt',data:new TextEncoder().encode('照片文件夹采用“日期_项目名称__永久记录ID”命名，例如 2026-10-03_跑步__W_xxx。双下划线后的永久ID用于导入匹配，因此 Excel 排序或移动行不会改变照片归属。')});
+    dlBlob(makeStoreZip(entries),`Momentum_Export_${todayISO()}.zip`)
+  }catch(err){console.error(err);alert('导出失败：'+err.message)}
+}
+function normalizeMomentumZipFiles(raw){
+  const names=Object.keys(raw).filter(n=>!n.endsWith('/'));
+  const candidates=names.filter(n=>n==='Momentum_Data.xlsx'||n.endsWith('/Momentum_Data.xlsx')).sort((a,b)=>a.split('/').length-b.split('/').length);
+  if(!candidates.length)throw Error('ZIP 中缺少 Momentum_Data.xlsx');
+  const bookPath=candidates[0],root=bookPath.slice(0,-'Momentum_Data.xlsx'.length),out={};
+  for(const [name,data] of Object.entries(raw)){
+    if(root&&!name.startsWith(root))continue;
+    const rel=root?name.slice(root.length):name;
+    if(rel&&!rel.endsWith('/'))out[rel]=data;
+  }
+  return out;
+}
+async function readMomentumZip(buf){
+  if(typeof fflate!=='undefined'&&fflate.unzipSync){
+    try{return normalizeMomentumZipFiles(fflate.unzipSync(new Uint8Array(buf)))}catch(e){throw Error('ZIP 无法解压：'+e.message)}
+  }
+  // 兼容应用自身生成的“仅存储”ZIP；若浏览器未加载解压组件，仍可导入原始导出包。
+  const u=new Uint8Array(buf),dv=new DataView(buf),dec=new TextDecoder(),out={};let p=0;
+  while(p+30<=u.length&&dv.getUint32(p,true)===0x04034b50){let method=dv.getUint16(p+8,true),cs=dv.getUint32(p+18,true),nl=dv.getUint16(p+26,true),xl=dv.getUint16(p+28,true),name=dec.decode(u.slice(p+30,p+30+nl)),ds=p+30+nl+xl;if(method!==0)throw Error('该 ZIP 使用了系统压缩，请联网后重试以加载 ZIP 解压组件');out[name]=u.slice(ds,ds+cs);p=ds+cs}
+  return normalizeMomentumZipFiles(out);
+}
+async function previewUnifiedImport(e){const f=e.target.files[0];e.target.value='';if(!f)return;const box=el('importPreview');box.style.display='block';box.textContent='正在读取 '+f.name+'…';try{if(f.name.toLowerCase().endsWith('.zip')){const files=await readMomentumZip(await f.arrayBuffer()),xlsxBytes=files['Momentum_Data.xlsx'];if(!xlsxBytes)throw Error('ZIP 中缺少 Momentum_Data.xlsx');if(typeof XLSX==='undefined')throw Error('Excel 组件尚未加载，请联网重新打开页面');const wb=XLSX.read(xlsxBytes,{type:'array'}),data={};wb.SheetNames.forEach(n=>data[n]=XLSX.utils.sheet_to_json(wb.Sheets[n],{defval:''}));let photoPaths=Object.keys(files).filter(x=>x.startsWith('Photos/训练照片/')||x.startsWith('Photos/身体档案照片/'));pendingUnifiedImport={kind:'zip',data,files,photoPaths};const rows=Object.values(data).reduce((n,a)=>n+a.length,0);box.innerHTML=`识别到 Momentum ZIP：${rows} 行结构化数据，${photoPaths.length} 张照片。照片将按永久记录ID归位。<br><button class="mini dark" style="margin-top:8px" onclick="confirmUnifiedImport()">确认导入</button>`}else{if(typeof XLSX==='undefined')throw Error('Excel 组件尚未加载，请联网重新打开页面');const wb=XLSX.read(await f.arrayBuffer(),{type:'array'}),data={};wb.SheetNames.forEach(n=>data[n]=XLSX.utils.sheet_to_json(wb.Sheets[n],{defval:''}));pendingUnifiedImport={kind:'xlsx',data};const rows=Object.values(data).reduce((n,a)=>n+a.length,0);box.innerHTML=`识别到 Excel：${wb.SheetNames.join(' / ')}，共 ${rows} 行。单独 Excel 只导入结构化数据；照片请使用完整 ZIP。<br><button class="mini dark" style="margin-top:8px" onclick="confirmUnifiedImport()">确认导入</button>`}}catch(err){pendingUnifiedImport=null;box.textContent='无法导入：'+err.message}}
+function normalizeRecordId(v,prefix){let s=String(v||'').trim();return s||prefix+'_'+Date.now().toString(36).toUpperCase()+'_'+Math.random().toString(36).slice(2,7).toUpperCase()}
+function importTrainingRows(rows){let added=0,map={};for(const r of rows){let date=r['日期'],name=r['项目名称'],type=r['分类'];if(!date||!name)continue;let rid=normalizeRecordId(r['记录ID'],'W'),wid='imp'+Date.now()+Math.random(),task={id:Date.now()+Math.random(),recordId:rid,name:String(name),type:String(type||'有氧'),status:'done',actual:{distance:+r['距离_km']||0,minutes:+r['时长_min']||0,avgHr:+r['平均心率']||null,maxHr:+r['最高心率']||null,rpe:+r['RPE']||null,ascent:+r['爬升_m']||0,feeling:r['备注']||''}};state.workouts.unshift({id:wid,date:String(date).slice(0,10),theme:'历史导入',tasks:[task],counts:{done:1,over:0,miss:0}});map[rid]=workoutOwner(wid,0);added++}return {added,map}}
+function importWorkbookData(d){let tr=importTrainingRows(d['训练记录']||[]),bodyN=0,abilityN=0,planN=0,bodyMap={};for(const r of d['身体档案']||[]){if(!r['日期'])continue;let rid=normalizeRecordId(r['记录ID'],'B'),id='impb'+Date.now()+Math.random();state.bodyArchive.push({id,recordId:rid,date:String(r['日期']).slice(0,10),weight:+r['体重_kg']||null,bodyFat:+r['体脂率_pct']||null,shoulder:+r['肩宽_cm']||null,chest:+r['胸围_cm']||null,waist:+r['腰围_cm']||null,hip:+r['臀围_cm']||null,armL:+r['左上臂_cm']||null,armR:+r['右上臂_cm']||null,thighL:+r['左大腿_cm']||null,thighR:+r['右大腿_cm']||null,calfL:+r['左小腿_cm']||null,calfR:+r['右小腿_cm']||null,note:r['备注']||''});bodyMap[rid]=bodyOwner(id);bodyN++}for(const r of d['身体能力']||[]){let def=abilityDefs.find(a=>a.id===String(r['能力ID']));if(!def)continue;let v=parseAbilityValue(def,String(r['成绩']));if(v==null||v==='')continue;let a=state.abilities[def.id],t={id:Date.now()+Math.random(),date:String(r['日期']).slice(0,10),value:v};a.testsAll=a.testsAll||[...(a.tests||[])];a.testsAll.push(t);a.testsAll.sort((x,y)=>y.date.localeCompare(x.date));a.tests=a.testsAll.slice(0,3);if(a.pb==null||(def.better==='low'?v<a.pb:v>a.pb)){a.pb=v;a.pbDate=t.date}abilityN++}for(const r of d['训练计划']||[]){let ds=String(r['日期']||'').slice(0,10),name=r['项目名称'];if(!ds||!name)continue;let start=new Date(state.plan.start+'T12:00:00'),dt=new Date(ds+'T12:00:00'),idx=Math.round((dt-start)/86400000);if(idx<0)continue;while(idx>=state.plan.weeks.length*7)state.plan.weeks.push({theme:`第 ${state.plan.weeks.length+1} 周训练`,goal:'',days:Array.from({length:7},()=>[])});syncLegacyDays();let type=String(r['分类']||'有氧'),t={id:Date.now()+Math.random(),type,name:String(name),note:r['计划备注']||'',status:'planned'};if(type==='有氧'){t.distance=+r['计划距离_km']||0;t.minutes=+r['计划时长_min']||0}else if(type==='技能'){t.minutes=+r['计划时长_min']||0}else t.sets=[];state.plan.days[idx].push(t);state.plan.weeks[Math.floor(idx/7)].days[idx%7]=state.plan.days[idx];planN++}syncLegacyDays();persist();renderAbilities();renderMedals();renderPlan();renderToday();renderStats();return {n:tr.added,bodyN,abilityN,planN,workoutMap:tr.map,bodyMap}}
+function mimeFromPath(path){let e=path.split('.').pop().toLowerCase();return e==='png'?'image/png':e==='webp'?'image/webp':e==='gif'?'image/gif':'image/jpeg'}
+async function bytesToDataURL(bytes,type){return await new Promise((res,rej)=>{let fr=new FileReader();fr.onload=()=>res(fr.result);fr.onerror=rej;fr.readAsDataURL(new Blob([bytes],{type}))})}
+async function confirmUnifiedImport(){if(!pendingUnifiedImport)return;try{const r=importWorkbookData(pendingUnifiedImport.data);let photoN=0,unmatched=0;if(pendingUnifiedImport.kind==='zip'){for(const path of pendingUnifiedImport.photoPaths||[]){let m=path.match(/^Photos\/(训练照片|身体档案照片)\/([^/]+)\/([^/]+)$/);if(!m)continue;let folder=m[2],rid=folder.includes('__')?folder.slice(folder.lastIndexOf('__')+2):folder;let owner=m[1]==='训练照片'?r.workoutMap[rid]:r.bodyMap[rid];if(!owner){unmatched++;continue}let bytes=pendingUnifiedImport.files[path],type=mimeFromPath(path),data=await bytesToDataURL(bytes,type);await photoPut({id:Date.now()+'_'+Math.random(),owner,name:m[3],type,createdAt:new Date().toISOString(),data});photoN++}}el('importPreview').textContent=`导入完成：训练 ${r.n} 条、计划 ${r.planN} 条、身体档案 ${r.bodyN} 条、能力测试 ${r.abilityN} 条${pendingUnifiedImport.kind==='zip'?'、照片 '+photoN+' 张':''}${unmatched?'；另有 '+unmatched+' 张照片未找到对应记录ID':''}。`;pendingUnifiedImport=null;renderWorkouts();renderBodyArchive()}catch(err){alert('导入失败：'+err.message)}}
+
+
+/* Momentum V0.2.6 — ability import, project-level TODAY state, live medal count, fixed TODAY color */
+function applyDailyTodayColor(){
+  const card=document.querySelector('.today');
+  if(card){card.style.setProperty('--today-a','#172A46');card.style.setProperty('--today-b','#315A8A')}
+}
+function updateHomeMedalCount(){
+  const n=abilityDefs.filter(def=>medalFor(def,state.abilities?.[def.id]?.pb)!=='lock').length;
+  if(el('homeMedalCount'))el('homeMedalCount').textContent=`${n} / ${abilityDefs.length}`;
+}
+const _renderMedalsV026=renderMedals;
+renderMedals=function(){_renderMedalsV026();updateHomeMedalCount()}
+function todayPlanTasks(){syncLegacyDays();const idx=currentDayIndex();return idx>=0?(state.plan.days[idx]||[]):[]}
+function completedTodayTaskIds(){
+  const ids=new Set();
+  (state.workouts||[]).filter(w=>w.date===todayISO()).forEach(w=>(w.tasks||[]).forEach(t=>{if(t.id!=null)ids.add(String(t.id))}));
+  return ids;
+}
+function pendingTodayTasks(){const done=completedTodayTaskIds();return todayPlanTasks().filter(t=>t.id==null||!done.has(String(t.id)))}
+isTodayCompleted=function(){const all=todayPlanTasks();return all.length>0&&pendingTodayTasks().length===0}
+reconcileTodayCompletion=function(){
+  const all=todayPlanTasks(),pending=pendingTodayTasks();
+  if(!all.length||pending.length)delete completedDates()[todayISO()];
+  else completedDates()[todayISO()]={completedAt:completedDates()[todayISO()]?.completedAt||new Date().toISOString()};
+}
+renderToday=function(){
+  syncLegacyDays();const idx=currentDayIndex(),tasks=idx>=0?(state.plan.days[idx]||[]):[],wi=idx>=0?Math.floor(idx/7):-1,done=completedTodayTaskIds();
+  todayTitle.textContent='今日训练';
+  const goal=wi>=0?(state.plan.weeks[wi]?.goal||'').trim():'';
+  const goalBox=el('todayWeekGoal');if(goalBox)goalBox.innerHTML=`<b>本周目标</b><span>${goal?esc(goal):'暂未设置'}</span>`;
+  if(!tasks.length){todayTasks.innerHTML='<div class="pill"><b>今日无计划</b><small>可前往本周规划添加训练</small></div>'}
+  else todayTasks.innerHTML=tasks.map(t=>{const ok=t.id!=null&&done.has(String(t.id));return `<div class="pill"><b>${ok?'✓ ':''}${taskEmoji(t)} ${esc(t.name)}</b><small>${ok?'已记录 · ':''}${taskDesc(t)}</small></div>`}).join('');
+  const btn=document.querySelector('.today-actions .primary');const pending=pendingTodayTasks();
+  if(tasks.length&&!pending.length){if(btn){btn.textContent='查看今日记录 →';btn.onclick=()=>go('stats')}}
+  else if(btn){btn.textContent=pending.length&&pending.length<tasks.length?'继续今日训练 →':'开始训练 →';btn.onclick=startToday}
+  applyDailyTodayColor();
+}
+startToday=function(){
+  try{
+    syncLegacyDays();const idx=currentDayIndex();if(idx<0){alert('今天不在当前规划周期内。请先在「本周规划」新增覆盖今天的计划周期。');go('plan');return}
+    const tasks=pendingTodayTasks();if(!todayPlanTasks().length){alert('今天还没有训练任务。请先在「本周规划」给今天添加训练。');go('plan');return}
+    if(!tasks.length){go('stats');return}
+    activeSession=JSON.parse(JSON.stringify(tasks));
+    pendingTodayPhotos={};
+    activeSession.forEach(t=>{t.status='pending';t.ended=false;t.actual=t.actual||{};if(t.type==='有氧'){t.actual.distance=t.distance??'';t.actual.minutes=t.minutes??'';t.actual.rounds=t.rounds??''}if(t.type==='技能'){t.actual.minutes=t.minutes??''}if(t.type==='力量'){t.sets=t.sets||[];t.sets.forEach(s=>{s.status='pending';s.actualReps=s.reps;s.actualWeight=s.weight})}});
+    saveActiveDraft();renderExecute();go('execute');
+  }catch(err){console.error(err);alert('开始训练时发生错误：'+err.message)}
+}
+function saveActiveSessionRecord(withSummary){
+  const a=allStatuses(),idx=currentDayIndex(),wi=idx>=0?Math.floor(idx/7):-1,theme=wi>=0?(state.plan.weeks[wi]?.theme||'今日训练'):'今日训练';
+  const record={id:Date.now(),date:todayISO(),source:'plan',theme,tasks:JSON.parse(JSON.stringify(activeSession)),rpe:withSummary?(+el('finishRpe').value||null):null,feeling:withSummary?(el('finishFeeling').value.trim()):'',note:withSummary?(el('finishNote').value.trim()):'',counts:{done:a.filter(x=>x==='done').length,over:a.filter(x=>x==='over').length,miss:a.filter(x=>x==='miss').length}};
+  state.workouts.unshift(record);reconcileTodayCompletion();persist();localStorage.removeItem('fitness_active_session');renderWorkouts();renderStats();renderToday();return record;
+}
+saveTodayComplete=function(){
+  saveActiveSessionRecord(false);el('completeText').textContent=`今天共记录 ${activeSession.length} 个训练项目。做得不错，数据已经保存。`;el('todayCompleteModal').classList.add('open');
+}
+saveFinishedTraining=function(){collectDetails(activeSession,'finish');saveActiveSessionRecord(true);closeModal('finishSummaryModal');go('stats');alert('训练已保存到「训练统计 · 最近记录」')}
+function normalizeAbilityKey(v){return String(v??'').trim().toLowerCase().replace(/\s+/g,'').replace(/[（）()]/g,'')}
+function findAbilityDefFromRow(r){
+  const keys=[r['能力ID'],r['项目'],r['能力'],r['项目名称']].map(normalizeAbilityKey).filter(Boolean);
+  const aliases={
+    '5k':'5k','5000m':'5k','5000米':'5k','1k':'1k','1000m':'1k','1000米':'1k','100m':'100m','100米':'100m',
+    'longjump':'longjump','立定跳远':'longjump','vertical':'vertical','垂直跳':'vertical','纵跳':'vertical',
+    'pullup':'pullup','标准引体':'pullup','标准引体向上':'pullup','引体向上':'pullup',
+    'pushup':'pushup','1min俯卧撑':'pushup','1分钟俯卧撑':'pushup','俯卧撑':'pushup',
+    'squat':'squat','深蹲1rm/bw':'squat','深蹲':'squat','deadlift':'deadlift','硬拉1rm/bw':'deadlift','硬拉':'deadlift',
+    'shuttle':'shuttle','5-10-5':'shuttle','5-10-5折返跑':'shuttle','balance':'balance','闭眼单腿':'balance','闭眼单腿站立':'balance',
+    'plank':'plank','平板支撑':'plank'
+  };
+  for(const k of keys){const id=aliases[k]||k;const def=abilityDefs.find(a=>a.id.toLowerCase()===id||normalizeAbilityKey(a.name)===k||normalizeAbilityKey(a.short)===k);if(def)return def}
+  return null;
+}
+parseAbilityValue=function(def,v){
+  if(v==null||v==='')return null;let s=String(v).trim().replace(/，/g,',');
+  if(def.unit==='mm:ss'){
+    const m=s.match(/(\d+)\s*[:：]\s*(\d+(?:\.\d+)?)/);if(m)return (+m[1]*60)+(+m[2]);
+    const zh=s.match(/(\d+(?:\.\d+)?)\s*分(?:钟)?\s*(\d+(?:\.\d+)?)?\s*秒?/);if(zh)return (+zh[1]*60)+(+zh[2]||0);
+  }
+  const m=s.replace(/,/g,'').match(/-?\d+(?:\.\d+)?/);return m?+m[0]:null;
+}
+function importAbilityRowsV026(rows){
+  let n=0;for(const r of rows){const def=findAbilityDefFromRow(r);if(!def)continue;const v=parseAbilityValue(def,r['成绩']??r['数值']??r['结果']);if(v==null||!isFinite(v)||v<=0)continue;const a=state.abilities[def.id]||(state.abilities[def.id]={tests:[],testsAll:[],pb:null,pbDate:null});const t={id:Date.now()+Math.random(),date:String(r['日期']||todayISO()).slice(0,10),value:v};a.testsAll=a.testsAll||[...(a.tests||[])];a.testsAll.push(t);a.testsAll.sort((x,y)=>String(y.date).localeCompare(String(x.date))||(+y.id||0)-(+x.id||0));a.tests=a.testsAll.slice(0,3);n++}
+  abilityDefs.forEach(def=>{const a=state.abilities[def.id];a.pb=null;a.pbDate=null;(a.testsAll||[]).forEach(t=>{if(a.pb==null||(def.better==='low'?t.value<a.pb:t.value>a.pb)){a.pb=t.value;a.pbDate=t.date}});a.tests=(a.testsAll||[]).slice(0,3)});return n;
+}
+const _importWorkbookDataV026=importWorkbookData;
+importWorkbookData=function(d){
+  const abilityRows=d['身体能力']||[];const copy={...d,'身体能力':[]};const r=_importWorkbookDataV026(copy);r.abilityN=importAbilityRowsV026(abilityRows);persist();renderAbilities();renderMedals();renderToday();return r;
+}
+
+
+
+/* Momentum V0.2.9 — stable photo ownership by permanent record ID */
+const PHOTO_OWNER_WORKOUT='workoutid:';
+const PHOTO_OWNER_BODY='bodyid:';
+function newPermanentId(prefix){return prefix+'_'+Date.now().toString(36).toUpperCase()+'_'+Math.random().toString(36).slice(2,8).toUpperCase()}
+function findWorkoutTaskByRecordId(rid){for(const w of (state.workouts||[])){for(let ti=0;ti<(w.tasks||[]).length;ti++){const t=w.tasks[ti];if(String(t.recordId)===String(rid))return {w,t,ti}}}return null}
+function findBodyByRecordId(rid){return (state.bodyArchive||[]).find(r=>String(r.recordId)===String(rid))||null}
+bodyOwner=function(id){const r=(state.bodyArchive||[]).find(x=>String(x.id)===String(id)||String(x.recordId)===String(id));if(r){if(!r.recordId){r.recordId=newPermanentId('B');persist()}return PHOTO_OWNER_BODY+r.recordId}return PHOTO_OWNER_BODY+String(id)};
+workoutOwner=function(wid,ti){const w=(state.workouts||[]).find(x=>String(x.id)===String(wid));const t=w?.tasks?.[+ti];if(t){if(!t.recordId){t.recordId=newPermanentId('W');persist()}return PHOTO_OWNER_WORKOUT+t.recordId}return 'workout:'+wid+':'+ti};
+function stableOwnerForRecordId(rid,kind){return (kind==='body'?PHOTO_OWNER_BODY:PHOTO_OWNER_WORKOUT)+rid}
+ownerRecordId=function(owner){if(!owner)return null;if(owner.startsWith(PHOTO_OWNER_WORKOUT))return owner.slice(PHOTO_OWNER_WORKOUT.length);if(owner.startsWith(PHOTO_OWNER_BODY))return owner.slice(PHOTO_OWNER_BODY.length);if(owner.startsWith('body:')){const r=(state.bodyArchive||[]).find(x=>String(x.id)===String(owner.slice(5)));return r?.recordId||null}if(owner.startsWith('workout:')){const z=owner.split(':'),w=(state.workouts||[]).find(x=>String(x.id)===String(z[1])),t=w?.tasks?.[+z[2]];return t?.recordId||null}return null};
+async function migrateLegacyPhotoOwners(){
+  ensureRecordIds();persist();let moved=0,unresolved=0;
+  for(const p of await allPhotos()){
+    if(p.owner?.startsWith(PHOTO_OWNER_WORKOUT)||p.owner?.startsWith(PHOTO_OWNER_BODY))continue;
+    const rid=ownerRecordId(p.owner);if(!rid){unresolved++;continue}
+    const isBody=p.owner.startsWith('body:');p.owner=stableOwnerForRecordId(rid,isBody?'body':'workout');await photoPut(p);moved++;
+  }
+  if(moved){renderBodyArchive();renderStats();renderHistory()}
+  if(unresolved)console.warn('Momentum: '+unresolved+' legacy photo(s) could not be matched during migration.');
+  return {moved,unresolved};
+}
+// Preserve permanent body record IDs when editing existing entries.
+saveBodyEntry=async function(){
+  let id=el('bodyEntryId').value||('b'+Date.now()),old=(state.bodyArchive||[]).find(x=>String(x.id)===String(id));
+  let r={id,recordId:old?.recordId||newPermanentId('B'),date:el('bodyDate').value||todayISO(),weight:getNum('bodyWeight'),bodyFat:getNum('bodyFat'),shoulder:getNum('bodyShoulder'),chest:getNum('bodyChest'),waist:getNum('bodyWaist'),hip:getNum('bodyHip'),armL:getNum('bodyArmL'),armR:getNum('bodyArmR'),thighL:getNum('bodyThighL'),thighR:getNum('bodyThighR'),calfL:getNum('bodyCalfL'),calfR:getNum('bodyCalfR'),note:el('bodyNote').value.trim()};
+  let i=state.bodyArchive.findIndex(x=>String(x.id)===String(id));if(i>=0)state.bodyArchive[i]=r;else state.bodyArchive.push(r);persist();el('bodyEntryId').value=id;await flushPendingBodyPhotos(id);closeModal('bodyEntryModal');renderBodyArchive();
+};
+// Imported photos bind directly to permanent IDs, never to array positions.
+const _importTrainingRowsV029=importTrainingRows;
+importTrainingRows=function(rows){const r=_importTrainingRowsV029(rows);const map={};for(const row of rows){const rid=String(row['记录ID']||'').trim();if(rid)map[rid]=stableOwnerForRecordId(rid,'workout')}r.map=map;return r};
+const _importWorkbookDataV029=importWorkbookData;
+importWorkbookData=function(d){const r=_importWorkbookDataV029(d);r.workoutMap={};for(const row of (d['训练记录']||[])){const rid=String(row['记录ID']||'').trim();if(rid)r.workoutMap[rid]=stableOwnerForRecordId(rid,'workout')}r.bodyMap={};for(const row of (d['身体档案']||[])){const rid=String(row['记录ID']||'').trim();if(rid)r.bodyMap[rid]=stableOwnerForRecordId(rid,'body')}return r};
+// TODAY records receive permanent IDs before any selected photos are committed.
+saveActiveSessionRecord=function(withSummary){
+  const a=allStatuses(),idx=currentDayIndex(),wi=idx>=0?Math.floor(idx/7):-1,theme=wi>=0?(state.plan.weeks[wi]?.theme||'今日训练'):'今日训练';
+  const tasks=JSON.parse(JSON.stringify(activeSession));tasks.forEach(t=>{if(!t.recordId)t.recordId=newPermanentId('W')});
+  const record={id:Date.now(),date:todayISO(),source:'plan',theme,tasks,rpe:withSummary?(+el('finishRpe').value||null):null,feeling:withSummary?(el('finishFeeling').value.trim()):'',note:withSummary?(el('finishNote').value.trim()):'',counts:{done:a.filter(x=>x==='done').length,over:a.filter(x=>x==='over').length,miss:a.filter(x=>x==='miss').length}};
+  state.workouts.unshift(record);reconcileTodayCompletion();persist();localStorage.removeItem('fitness_active_session');renderWorkouts();renderStats();renderToday();return record;
+};
+async function savePendingTodayPhotos(record){for(let ti=0;ti<record.tasks.length;ti++){const files=pendingTodayPhotos[ti]||[];if(files.length)await addFiles(PHOTO_OWNER_WORKOUT+record.tasks[ti].recordId,files)}pendingTodayPhotos={}}
+saveTodayComplete=async function(){const record=saveActiveSessionRecord(false);try{await savePendingTodayPhotos(record)}catch(err){console.error(err);alert('训练已保存，但部分照片保存失败：'+err.message)}el('completeText').textContent=`今天共记录 ${activeSession.length} 个训练项目。数据和训练照片已经保存。`;el('todayCompleteModal').classList.add('open')};
+saveFinishedTraining=async function(){collectDetails(activeSession,'finish');const record=saveActiveSessionRecord(true);try{await savePendingTodayPhotos(record)}catch(err){console.error(err);alert('训练已保存，但部分照片保存失败：'+err.message)}closeModal('finishSummaryModal');go('stats');alert('训练已保存到「训练统计 · 最近记录」')};
+// Export understands both migrated stable owners and legacy owners; stable owners are authoritative.
+exportAllData=async function(){
+  if(typeof XLSX==='undefined'){alert('Excel 组件尚未加载。请保持联网并重新打开页面后再导出。');return}
+  try{
+    await migrateLegacyPhotoOwners();ensureRecordIds();
+    const wb=buildExcelWorkbook(),xlsx=new Uint8Array(XLSX.write(wb,{bookType:'xlsx',type:'array'})),photos=await allPhotos();
+    const entries=[{name:'Momentum_Data.xlsx',data:xlsx}],counters={};
+    for(const p of photos){
+      const rid=ownerRecordId(p.owner);if(!rid)continue;
+      const isBody=p.owner.startsWith(PHOTO_OWNER_BODY)||p.owner.startsWith('body:');
+      const kind=isBody?'Body':'Workouts',key=kind+'/'+rid,c=(counters[key]=(counters[key]||0)+1);
+      const name=`Photos/${kind}/${rid}/${String(c).padStart(3,'0')}_${safeFileName(p.name||'photo')}.${extForPhoto(p)}`;
+      entries.push({name,data:dataURLBytes(p.data)});
+    }
+    entries.push({name:'Photos/README.txt',data:new TextEncoder().encode('Momentum photo archive. Photos/Workouts/<W_record_id>/ contains workout photos; Photos/Body/<B_record_id>/ contains body archive photos. Folder paths are ASCII-only for ZIP compatibility across macOS, Windows and browsers.')});
+    dlBlob(makeStoreZip(entries),`Momentum_Export_${todayISO()}.zip`)
+  }catch(err){console.error(err);alert('导出失败：'+err.message)}
+}
+
+window.addEventListener('error',e=>console.error('App error:',e.error||e.message));init();setTimeout(()=>migrateLegacyPhotoOwners().catch(console.error),0);
+
+// V0.2.12 — historical workout backfill
+let backfillPhotos=[];
+function backfillToday(){return new Date().toISOString().slice(0,10)}
+function quickRecord(type){openBackfill(type==='补录'?'有氧':type)}
+function openBackfill(type='有氧'){
+  backfillPhotos.forEach(x=>{try{URL.revokeObjectURL(x.url)}catch(e){}});backfillPhotos=[];
+  el('bfDate').value=backfillToday();el('bfDate').max=backfillToday();el('bfType').value=['有氧','力量','技能'].includes(type)?type:'有氧';el('bfName').value='';el('bfFeeling').value='';
+  renderBackfillFields();renderBackfillPhotos();el('backfillModal').classList.add('open')
+}
+function closeBackfill(){backfillPhotos.forEach(x=>{try{URL.revokeObjectURL(x.url)}catch(e){}});backfillPhotos=[];closeModal('backfillModal')}
+function backfillNames(type){const base=type==='有氧'?['跑步','徒步','游泳','羽毛球','骑行']:type==='力量'?['引体向上','俯卧撑','深蹲','硬拉','卧推','力量训练']:['倒立','L-sit','技能训练'];return [...new Set(base.concat((state.custom||[]).filter(x=>!x.type||x.type===type).map(x=>x.name)).filter(Boolean))]}
+function renderBackfillFields(){
+ const type=el('bfType').value;el('bfNameList').innerHTML=backfillNames(type).map(x=>`<option value="${esc(x)}">`).join('');
+ if(type==='有氧')el('bfDynamic').innerHTML=`<div class="formgrid" style="margin-top:12px"><div class="field"><label>距离 km</label><input id="bfDistance" type="number" min="0" step="0.01"></div><div class="field"><label>时长 min</label><input id="bfMinutes" type="number" min="0" step="1"></div><div class="field"><label>平均心率</label><input id="bfAvgHr" type="number" min="0"></div><div class="field"><label>最高心率</label><input id="bfMaxHr" type="number" min="0"></div><div class="field"><label>RPE</label><input id="bfRpe" type="number" min="1" max="10" step="1"></div><div class="field"><label>爬升 m</label><input id="bfAscent" type="number" min="0" step="1"></div></div>`;
+ else if(type==='技能')el('bfDynamic').innerHTML=`<div class="formgrid" style="margin-top:12px"><div class="field"><label>时长 min</label><input id="bfMinutes" type="number" min="0" step="1"></div><div class="field"><label>平均心率</label><input id="bfAvgHr" type="number" min="0"></div><div class="field"><label>RPE</label><input id="bfRpe" type="number" min="1" max="10" step="1"></div></div>`;
+ else el('bfDynamic').innerHTML=`<div style="margin-top:14px"><div class="row"><b>训练组</b><button class="mini light" type="button" onclick="addBackfillSet()">＋ 添加一组</button></div><div id="bfSets" class="strength-sets"></div><div class="formgrid" style="margin-top:12px"><div class="field"><label>总时长 min</label><input id="bfMinutes" type="number" min="0" step="1"></div><div class="field"><label>RPE</label><input id="bfRpe" type="number" min="1" max="10" step="1"></div></div></div>`;
+ if(type==='力量'){addBackfillSet();addBackfillSet();addBackfillSet()}
+}
+function addBackfillSet(){const box=el('bfSets');if(!box)return;const n=box.children.length+1,d=document.createElement('div');d.className='strength-set';d.innerHTML=`<b>第${n}组</b><div class="field"><label>重量 kg</label><input class="bfWeight" type="number" min="0" step="0.5"></div><div class="field"><label>次数</label><input class="bfReps" type="number" min="0" step="1"></div><button class="mini light" type="button" onclick="this.parentElement.remove()">×</button>`;box.appendChild(d)}
+function addBackfillPhotos(e){for(const f of Array.from(e.target.files||[])){backfillPhotos.push({file:f,url:URL.createObjectURL(f)})}e.target.value='';renderBackfillPhotos()}
+function removeBackfillPhoto(i){const x=backfillPhotos[i];if(x)try{URL.revokeObjectURL(x.url)}catch(e){}backfillPhotos.splice(i,1);renderBackfillPhotos()}
+function renderBackfillPhotos(){const box=el('bfPhotoGrid');if(!box)return;box.innerHTML=backfillPhotos.map((x,i)=>`<div class="today-photo-thumb"><img src="${x.url}"><button type="button" onclick="removeBackfillPhoto(${i})">×</button></div>`).join('')}
+function num(id){const x=el(id);return x&&x.value!==''?+x.value:null}
+async function saveBackfill(){
+ const date=el('bfDate').value,type=el('bfType').value,name=el('bfName').value.trim();if(!date){alert('请选择训练日期');return}if(date>backfillToday()){alert('补录训练只能选择今天或过去的日期');return}if(!name){alert('请输入项目名称');return}
+ const recordId=newPermanentId('W'),task={id:'BF_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,6),recordId,name,type,status:'done',actual:{minutes:num('bfMinutes')||0,rpe:num('bfRpe'),feeling:el('bfFeeling').value.trim()}};
+ if(type==='有氧'){Object.assign(task.actual,{distance:num('bfDistance')||0,avgHr:num('bfAvgHr'),maxHr:num('bfMaxHr'),ascent:num('bfAscent')||0})}
+ if(type==='技能'){Object.assign(task.actual,{avgHr:num('bfAvgHr')})}
+ if(type==='力量'){task.sets=Array.from(document.querySelectorAll('#bfSets .strength-set')).map((r,i)=>({set:i+1,actualWeight:+r.querySelector('.bfWeight').value||0,actualReps:+r.querySelector('.bfReps').value||0,status:'done'})).filter(x=>x.actualWeight||x.actualReps)}
+ const record={id:'BFW_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,7),date,theme:'补录训练',tasks:[task],counts:{done:1,over:0,miss:0}};
+ state.workouts.unshift(record);persist();
+ try{if(backfillPhotos.length)await addFiles(PHOTO_OWNER_WORKOUT+recordId,backfillPhotos.map(x=>x.file))}catch(err){console.error(err);alert('训练记录已保存，但部分照片保存失败：'+err.message)}
+ backfillPhotos.forEach(x=>{try{URL.revokeObjectURL(x.url)}catch(e){}});backfillPhotos=[];closeModal('backfillModal');renderWorkouts();renderStats();renderHistory();renderToday();alert('补录训练已保存到训练统计与历史记录。')
+}
+</script><script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script><script src="https://cdn.jsdelivr.net/npm/fflate@0.8.2/umd/index.js"></script><script>
+/* Momentum V0.2.10 — photo ZIP import: Excel photo directory is the source of truth */
+function normZipPath(p){
+  return String(p||'').replace(/\\/g,'/').replace(/^\.\//,'').replace(/^\/+/,'').replace(/\/+/g,'/');
+}
+function normPhotoDir(p){
+  p=normZipPath(p).trim();
+  return p && !p.endsWith('/') ? p+'/' : p;
+}
+function buildPhotoDirectoryOwnerMap(data, imported){
+  const map=new Map();
+  for(const row of (data['训练记录']||[])){
+    const rid=String(row['记录ID']||'').trim();
+    const dir=normPhotoDir(row['照片目录']);
+    const owner=(rid&&imported.workoutMap?.[rid]) || (rid?stableOwnerForRecordId(rid,'workout'):null);
+    if(dir&&owner)map.set(dir,owner);
+  }
+  for(const row of (data['身体档案']||[])){
+    const rid=String(row['记录ID']||'').trim();
+    const dir=normPhotoDir(row['照片目录']);
+    const owner=(rid&&imported.bodyMap?.[rid]) || (rid?stableOwnerForRecordId(rid,'body'):null);
+    if(dir&&owner)map.set(dir,owner);
+  }
+  return map;
+}
+function ownerForImportedPhoto(path,dirMap,imported){
+  const p=normZipPath(path);
+  // Primary: exact exported photo directory recorded in Excel.
+  for(const [dir,owner] of dirMap){ if(p.startsWith(dir)) return owner; }
+  // Fallback: permanent ID embedded in folder name.
+  const m=p.match(/^Photos\/(训练照片|身体档案照片)\/([^/]+)\/[^/]+$/);
+  if(!m)return null;
+  const folder=m[2];
+  const rid=folder.includes('__')?folder.slice(folder.lastIndexOf('__')+2).trim():'';
+  if(!rid)return null;
+  return m[1]==='训练照片' ? (imported.workoutMap?.[rid]||stableOwnerForRecordId(rid,'workout')) : (imported.bodyMap?.[rid]||stableOwnerForRecordId(rid,'body'));
+}
+confirmUnifiedImport=async function(){
+  if(!pendingUnifiedImport)return;
+  try{
+    const pending=pendingUnifiedImport;
+    const r=importWorkbookData(pending.data);
+    let photoN=0,unmatched=0;
+    if(pending.kind==='zip'){
+      const dirMap=buildPhotoDirectoryOwnerMap(pending.data,r);
+      for(const rawPath of (pending.photoPaths||[])){
+        const path=normZipPath(rawPath);
+        const owner=ownerForImportedPhoto(path,dirMap,r);
+        if(!owner){unmatched++;continue}
+        const bytes=pending.files[rawPath]||pending.files[path];
+        if(!bytes){unmatched++;continue}
+        const filename=path.split('/').pop()||'photo.jpg';
+        const type=mimeFromPath(path),data=await bytesToDataURL(bytes,type);
+        await photoPut({id:Date.now()+'_'+Math.random().toString(36).slice(2),owner,name:filename.replace(/^\d{3}_/,''),type,createdAt:new Date().toISOString(),data});
+        photoN++;
+      }
+    }
+    el('importPreview').textContent=`导入完成：训练 ${r.n} 条、计划 ${r.planN} 条、身体档案 ${r.bodyN} 条、能力测试 ${r.abilityN} 条${pending.kind==='zip'?'、照片 '+photoN+' 张':''}${unmatched?'；另有 '+unmatched+' 张照片未匹配':''}。`;
+    pendingUnifiedImport=null;
+    renderWorkouts();renderBodyArchive();renderStats();renderHistory();
+  }catch(err){console.error(err);alert('导入失败：'+err.message)}
+};
+
+
+/* Momentum V0.2.11 — ASCII ZIP photo paths + ID-first photo import */
+function isRealPhotoPath(path){
+  const p=normZipPath(path),base=(p.split('/').pop()||'');
+  if(!base||base==='.DS_Store'||base.startsWith('._')||p.startsWith('__MACOSX/'))return false;
+  return /\.(jpe?g|png|webp|gif|heic|heif)$/i.test(base);
+}
+function recordIdFromPhotoPath(path){
+  const p=normZipPath(path);
+  let m=p.match(/^Photos\/Workouts\/(W_[^/]+)\/[^/]+$/i);
+  if(m)return {kind:'workout',rid:m[1]};
+  m=p.match(/^Photos\/Body\/(B_[^/]+)\/[^/]+$/i);
+  if(m)return {kind:'body',rid:m[1]};
+  // Legacy Momentum archives: recover the permanent ID from the final folder token.
+  const parts=p.split('/');
+  for(const part of parts){
+    const wm=part.match(/(?:^|__)(W_[A-Za-z0-9_-]+)$/);if(wm)return {kind:'workout',rid:wm[1]};
+    const bm=part.match(/(?:^|__)(B_[A-Za-z0-9_-]+)$/);if(bm)return {kind:'body',rid:bm[1]};
+  }
+  return null;
+}
+previewUnifiedImport=async function(e){
+  const f=e.target.files[0];e.target.value='';if(!f)return;
+  const box=el('importPreview');box.style.display='block';box.textContent='正在读取 '+f.name+'…';
+  try{
+    if(f.name.toLowerCase().endsWith('.zip')){
+      const files=await readMomentumZip(await f.arrayBuffer()),xlsxBytes=files['Momentum_Data.xlsx'];
+      if(!xlsxBytes)throw Error('ZIP 中缺少 Momentum_Data.xlsx');
+      if(typeof XLSX==='undefined')throw Error('Excel 组件尚未加载，请联网重新打开页面');
+      const wb=XLSX.read(xlsxBytes,{type:'array'}),data={};
+      wb.SheetNames.forEach(n=>data[n]=XLSX.utils.sheet_to_json(wb.Sheets[n],{defval:''}));
+      const photoPaths=Object.keys(files).filter(isRealPhotoPath);
+      pendingUnifiedImport={kind:'zip',data,files,photoPaths};
+      const rows=Object.values(data).reduce((n,a)=>n+a.length,0);
+      box.innerHTML=`识别到 Momentum ZIP：${rows} 行结构化数据，${photoPaths.length} 张照片。照片将按永久记录ID归位。<br><button class="mini dark" style="margin-top:8px" onclick="confirmUnifiedImport()">确认导入</button>`;
+    }else{
+      if(typeof XLSX==='undefined')throw Error('Excel 组件尚未加载，请联网重新打开页面');
+      const wb=XLSX.read(await f.arrayBuffer(),{type:'array'}),data={};
+      wb.SheetNames.forEach(n=>data[n]=XLSX.utils.sheet_to_json(wb.Sheets[n],{defval:''}));
+      pendingUnifiedImport={kind:'xlsx',data};
+      const rows=Object.values(data).reduce((n,a)=>n+a.length,0);
+      box.innerHTML=`识别到 Excel：${wb.SheetNames.join(' / ')}，共 ${rows} 行。单独 Excel 只导入结构化数据；照片请使用完整 ZIP。<br><button class="mini dark" style="margin-top:8px" onclick="confirmUnifiedImport()">确认导入</button>`;
+    }
+  }catch(err){pendingUnifiedImport=null;box.textContent='无法导入：'+err.message}
+};
+confirmUnifiedImport=async function(){
+  if(!pendingUnifiedImport)return;
+  try{
+    const pending=pendingUnifiedImport,r=importWorkbookData(pending.data);let photoN=0,unmatched=0;
+    if(pending.kind==='zip'){
+      const dirMap=buildPhotoDirectoryOwnerMap(pending.data,r);
+      for(const rawPath of (pending.photoPaths||[])){
+        const path=normZipPath(rawPath);let owner=null;
+        const ref=recordIdFromPhotoPath(path);
+        if(ref){owner=ref.kind==='workout'?(r.workoutMap?.[ref.rid]||stableOwnerForRecordId(ref.rid,'workout')):(r.bodyMap?.[ref.rid]||stableOwnerForRecordId(ref.rid,'body'))}
+        if(!owner)owner=ownerForImportedPhoto(path,dirMap,r);
+        if(!owner){unmatched++;continue}
+        const bytes=pending.files[rawPath]||pending.files[path];if(!bytes){unmatched++;continue}
+        const filename=path.split('/').pop()||'photo.jpg',type=mimeFromPath(path),data=await bytesToDataURL(bytes,type);
+        await photoPut({id:Date.now()+'_'+Math.random().toString(36).slice(2),owner,name:filename.replace(/^\d{3}_/,''),type,createdAt:new Date().toISOString(),data});photoN++;
+      }
+    }
+    el('importPreview').textContent=`导入完成：训练 ${r.n} 条、计划 ${r.planN} 条、身体档案 ${r.bodyN} 条、能力测试 ${r.abilityN} 条${pending.kind==='zip'?'、照片 '+photoN+' 张':''}${unmatched?'；另有 '+unmatched+' 张照片未匹配':''}。`;
+    pendingUnifiedImport=null;renderWorkouts();renderBodyArchive();renderStats();renderHistory();
+  }catch(err){console.error(err);alert('导入失败：'+err.message)}
+};
+</script><script>
+/* V0.3.1 presentation helpers; existing fitness logic remains unchanged. */
+function latestBodyRecord(){return [...(state.bodyArchive||[])].sort((a,b)=>String(b.date||'').localeCompare(String(a.date||'')))[0]||null}
+function renderProgressOverview(){
+  const n=abilityDefs.filter(def=>medalFor(def,state.abilities?.[def.id]?.pb)!=='lock').length;
+  const pc=el('progressPerformanceCount');if(pc)pc.textContent=`${n} / ${abilityDefs.length}`;
+  const r=latestBodyRecord(),g=state.bodyGoals||{};
+  if(el('progressCurrentWeight'))el('progressCurrentWeight').textContent=r?.weight!=null?`${r.weight} kg`:'—';
+  if(el('progressCurrentFat'))el('progressCurrentFat').textContent=r?.bodyFat!=null?`${r.bodyFat}%`:'—';
+  if(el('progressTargetWeight'))el('progressTargetWeight').textContent=g.weight!=null&&g.weight!==''?`${g.weight} kg`:'—';
+  if(el('progressTargetFat'))el('progressTargetFat').textContent=g.bodyFat!=null&&g.bodyFat!==''?`${g.bodyFat}%`:'—';
+}
+function loadBodyGoals(){const g=state.bodyGoals||{};if(el('bodyGoalWeight'))el('bodyGoalWeight').value=g.weight??'';if(el('bodyGoalFat'))el('bodyGoalFat').value=g.bodyFat??''}
+function saveBodyGoals(){state.bodyGoals={weight:el('bodyGoalWeight').value===''?null:+el('bodyGoalWeight').value,bodyFat:el('bodyGoalFat').value===''?null:+el('bodyGoalFat').value};persist();renderProgressOverview();alert('身体目标已保存。')}
+const _openBodyArchiveV031=openBodyArchive;openBodyArchive=function(){_openBodyArchiveV031();loadBodyGoals()}
+const _renderBodyArchiveV031=renderBodyArchive;renderBodyArchive=async function(){await _renderBodyArchiveV031();renderProgressOverview()}
+const _renderAbilitiesV031=renderAbilities;renderAbilities=function(){_renderAbilitiesV031();renderProgressOverview()}
+const _goV031=go;go=function(id){_goV031(id);if(id==='ability')renderProgressOverview();if(id==='bodyArchive')loadBodyGoals()}
+document.addEventListener('DOMContentLoaded',()=>setTimeout(renderProgressOverview,0));
+</script>
+<script>
+/* V0.3.2 TODAY ring presentation only */
+function renderTodayRingV032(){
+  const all=typeof todayPlanTasks==='function'?todayPlanTasks():[];
+  const done=typeof completedTodayTaskIds==='function'?completedTodayTaskIds():new Set();
+  const total=all.length,finished=all.filter(t=>t.id!=null&&done.has(String(t.id))).length;
+  const ring=document.getElementById('todayProgressRing'),count=document.getElementById('todayRingCount');
+  if(count)count.textContent=`${finished} / ${total}`;
+  if(ring)ring.style.setProperty('--ring-progress',total?`${Math.round(finished/total*100)}%`:'0%');
+}
+const _renderTodayV032=renderToday;renderToday=function(){const r=_renderTodayV032.apply(this,arguments);renderTodayRingV032();return r};
+document.addEventListener('DOMContentLoaded',()=>setTimeout(renderTodayRingV032,0));
+</script>
+</body></html>
